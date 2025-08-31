@@ -1,0 +1,21 @@
+<config>
+    <Lang>EN</Lang>
+    <ReportPartation>D://تقارير برنامج الغياب</ReportPartation>
+    <companyName>Tooling Room Application</companyName>
+    <companySpecialty>Telecom</companySpecialty>
+    <Email>mohamedagabr96@gmail.com</Email>
+    <password>hhmjmtvacywknthu</password>
+    <pdfHeader>C:\\logo.png</pdfHeader>
+    <cardHeader>C:\\header.jpg</cardHeader>
+    <cardFooter>C:\\footer.jpg</cardFooter>
+    <ReceitHeader>C:\\header.jpg</ReceitHeader>
+    <backUpSetting>c:\\Program Files\\MySQL\\MySQL Workbench 8.0\\mysqldump --no-defaults --user=</backUpSetting>
+    <backUpPath>D://BackUp</backUpPath>
+    <StoreAlarm>1</StoreAlarm>
+    <database>POS</database>
+    <databaseUser>root</databaseUser>
+    <databasePass>root</databasePass>
+    <databaseIp>localhost</databaseIp>
+    <BarcodePrinterName>localhost</BarcodePrinterName>
+
+</config>

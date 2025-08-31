@@ -1,0 +1,57 @@
+/* Unified table header background */
+#table1.table-view .column-header-background {
+    -fx-background-color: #9fb0b2;
+    -fx-padding: 8;
+}
+
+/* Unified table column header */
+#table1.table-view .column-header {
+    -fx-background-color: #d6d8db;
+    -fx-border-color: #ffffff;
+}
+
+/* Unified column header label */
+#table1.table-view .column-header .label {
+    -fx-text-fill: #000000; /* Black text */
+    -fx-font-weight: bold;
+}
+
+/* Unified table cell styling */
+#table1.table-view .table-cell {
+    -fx-background-color: #f5f7f7; /* Light neutral cell background */
+    -fx-text-fill: #000000;
+}
+
+/* Unified selected row styling */
+#table1.table-view .table-row-cell:selected {
+    -fx-background-color: #00727d !important; /* Main color on selection */
+    -fx-text-fill: #000000 !important;
+}
+
+/* Unified VBox or container box styling */
+.box {
+    -fx-background-color: #d6d8db;
+    -fx-background-radius: 20;
+    -fx-border-color: #9fb0b2;
+    -fx-border-radius: 20;
+    -fx-padding: 10;
+}
+
+/* Unified button styling (if needed for visual consistency) */
+.button {
+    -fx-background-color: #d6d8db;
+    -fx-background-radius: 20;
+    -fx-border-color: #9fb0b2;
+    -fx-border-radius: 20;
+    -fx-text-fill: #000000;
+}
+
+/* Unified input field (TextField/PasswordField/etc.) */
+.input {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+    -fx-border-color: #00727d;
+    -fx-text-fill: #000000;
+}

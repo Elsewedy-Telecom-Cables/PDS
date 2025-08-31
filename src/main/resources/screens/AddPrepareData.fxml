@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="731.0" prefWidth="1433.0" stylesheets="@style3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.pdsapp.controllers.AddPrepareDataController">
+   <children>
+      <HBox alignment="CENTER" layoutX="5.0" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="55.0" prefWidth="1209.0" styleClass="box-samll1" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="welcome_lbl" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="289.0">
+                     <font>
+                        <Font name="Montserrat Black" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="date_lbl" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="288.0" textFill="#00727d">
+                     <font>
+                        <Font name="Montserrat Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="4.0" left="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="266.0" text="Processing Department">
+                     <font>
+                        <Font name="Montserrat Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="67.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="logo_ImageView" fitHeight="54.0" fitWidth="130.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" right="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox alignment="TOP_CENTER" layoutX="12.0" layoutY="64.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="586.0" prefWidth="991.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="210.0" prefWidth="958.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="208.0" prefWidth="450.0" styleClass="box">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="438.0">
+                           <children>
+                              <Label alignment="TOP_CENTER" prefHeight="32.0" prefWidth="126.0" text="Machines">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="358.0">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button fx:id="clear_machine_btn" mnemonicParsing="false" onAction="#clear_machine" prefHeight="27.0" prefWidth="78.0" styleClass="box-01" text="Clear " HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-eraser" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="filter_machines_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_machines" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
+                           <children>
+                              <Button fx:id="add_machine_btn" mnemonicParsing="false" onAction="#add_machine" prefHeight="27.0" prefWidth="78.0" styleClass="box-01" text="Add   " HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-plus" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="machine_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add machine name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
+                           <children>
+                              <Button fx:id="update_machine_btn" mnemonicParsing="false" onAction="#update_machine" prefHeight="27.0" prefWidth="78.0" styleClass="box-01" text="Update" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="11.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-check" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="update_machine_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update machine name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <opaqueInsets>
+                              <Insets top="2.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="88.0" prefWidth="322.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TableView id="table1" fx:id="machines_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="machine_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
+                                    <TableColumn fx:id="machine_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="214.0" text="Machine Name" />
+                                    <TableColumn fx:id="machine_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <HBox.margin>
+                                    <Insets bottom="-10.0" left="8.0" right="8.0" top="4.0" />
+                                 </HBox.margin>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="208.0" prefWidth="450.0" styleClass="box">
+                     <children>
+                        <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="30.0" prefWidth="438.0">
+                           <children>
+                              <Label alignment="TOP_CENTER" prefHeight="32.0" prefWidth="126.0" text="Sections">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="322.0">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button fx:id="clear_section_btn" mnemonicParsing="false" onAction="#clear_section" prefHeight="28.0" prefWidth="78.0" styleClass="box-03" text="Clear " textFill="#000505" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-eraser" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="filter_section_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_section" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
+                           <children>
+                              <Button fx:id="add_section_btn" mnemonicParsing="false" onAction="#add_section" prefHeight="28.0" prefWidth="78.0" styleClass="box-03" text="Add   " textFill="#000505" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-plus" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="section_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add section name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
+                           <children>
+                              <Button fx:id="update_section_btn" mnemonicParsing="false" onAction="#update_section" prefHeight="28.0" prefWidth="78.0" styleClass="box-03" text="Update" textFill="#000505" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="11.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-check" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="update_section_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update section name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <opaqueInsets>
+                              <Insets top="2.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="166.0" prefWidth="438.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TableView id="table1" fx:id="section_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="120.0" prefWidth="304.0" HBox.hgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="section_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
+                                    <TableColumn fx:id="section_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="214.0" text="Section Name" />
+                                    <TableColumn fx:id="section_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <HBox.margin>
+                                    <Insets bottom="-10.0" left="8.0" right="8.0" top="4.0" />
+                                 </HBox.margin>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="210.0" prefWidth="958.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="208.0" prefWidth="450.0" styleClass="box">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="320.0">
+                           <children>
+                              <Label alignment="TOP_CENTER" prefHeight="32.0" prefWidth="126.0" text="Sppliers">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="358.0">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button fx:id="clear_supplier_btn" mnemonicParsing="false" onAction="#clear_supplier" prefHeight="27.0" prefWidth="78.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-eraser" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="filter_supplier_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_supplier" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
+                           <children>
+                              <Button fx:id="add_supplier_btn" mnemonicParsing="false" onAction="#add_supplier" prefHeight="27.0" prefWidth="78.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-plus" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
+                           <children>
+                              <Button fx:id="update_supplier_btn" mnemonicParsing="false" onAction="#update_supplier" prefHeight="28.0" prefWidth="78.0" styleClass="box-05" text="Update" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="11.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconLiteral="fa-check" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="update_supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="12.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <opaqueInsets>
+                              <Insets top="2.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="88.0" prefWidth="322.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TableView id="table1" fx:id="supplier_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="supplier_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
+                                    <TableColumn fx:id="supplier_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="214.0" text="Supplier Name" />
+                                    <TableColumn fx:id="supplier_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <HBox.margin>
+                                    <Insets bottom="-10.0" left="8.0" right="8.0" top="4.0" />
+                                 </HBox.margin>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

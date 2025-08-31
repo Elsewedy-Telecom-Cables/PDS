@@ -1,0 +1,347 @@
+
+.button-1{
+    -fx-background-color: #00727d;
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+}
+
+.button-3{
+    -fx-background-color: #2e8b57;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.button-5{
+    -fx-background-color: #ee7f2a;  /* #f28c38 */
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+
+.button-20{
+    -fx-background-color: #ba3428;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-width: 1.3;
+}
+.button-7{
+    -fx-background-color: #00727d;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+}
+.button-6{
+    -fx-background-color: #FF5959;
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+}
+
+.button-6:pressed {
+    -fx-background-color: #981100;
+}
+.save_btn{
+    -fx-background-color:  #2e8b57;
+    -fx-text-fill: white ;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 1.3;
+}
+
+.input{
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-width: 0.5;
+    -fx-border-color: #a69a9a;
+}
+
+.input-01{
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #595757; /*#028d8d; */
+    -fx-border-width: 1.3;
+
+}
+.input2{
+    -fx-background-radius: 5 ;
+    -fx-border-radius: 5 ;
+    -fx-border-width: 0.5;
+    -fx-border-color: #a69a9a;
+}
+.input-02 {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #929292; /*#028d8d; */
+    -fx-border-width: 1.3;
+
+}
+.input-03{
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #b7b4b4; /*#028d8d; */
+    -fx-border-width: 1;
+}
+.input-04{
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #929292; /* #929292  */
+    -fx-border-width: 1.3;
+
+}
+
+/* Unified VBox or container box styling */
+.box {
+    -fx-background-color: #d6d8db;
+    -fx-background-radius: 20;
+    -fx-border-color: #9fb0b2;
+    -fx-border-radius: 20;
+    -fx-padding: 10;
+}
+/* checkbox */
+.accepted-checkbox:selected .box {
+    -fx-background-color: #90EE90; /* Green */
+}
+
+.refused-checkbox:selected .box {
+    -fx-background-color: #FF4040; /* Red */
+}
+
+.hold-checkbox:selected .box {
+    -fx-background-color: #FFFF00; /* Yellow */
+}
+
+/* Color checkbox text when row is selected */
+.table-row-cell:selected .check-box .text {
+    -fx-fill: #000000; /* Brown */
+}
+
+/* Ensure checkbox background colors remain unchanged when row is selected */
+.accepted-checkbox:selected .box {
+    -fx-background-color: #90EE90; /* Green */
+}
+
+.refused-checkbox:selected .box {
+    -fx-background-color: #FF4040; /* Red */
+}
+
+.hold-checkbox:selected .box {
+    -fx-background-color: #FFFF00; /* Yellow */
+}
+
+/* Ensure checkbox background is transparent when not selected */
+.accepted-checkbox .box,
+.refused-checkbox .box,
+.hold-checkbox .box {
+    -fx-background-color: transparent;
+}
+
+/* Ensure test_situation_column background color is not overridden when row is selected */
+.table-row-cell:selected .table-cell.test-situation-cell {
+    -fx-background-color: -fx-cell-background;
+}
+
+/* Ensure checkbox text color in AddFileController */
+.table-row-cell:selected .check-box .text {
+    -fx-fill: #8B4513; /* Brown */
+}
+
+.accepted-checkbox:selected .box {
+    -fx-background-color: #90EE90; /* Green */
+}
+
+.refused-checkbox:selected .box {
+    -fx-background-color: #FF4040; /* Red */
+}
+
+.hold-checkbox:selected .box {
+    -fx-background-color: #FFFF00; /* Yellow */
+}
+
+.accepted-checkbox .box,
+.refused-checkbox .box,
+.hold-checkbox .box {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #B0E0E6; /* Light cyan */
+}
+
+/* Ensure test_situation_column background color is not overridden when row is selected */
+.table-row-cell:selected .test-situation-cell {
+    -fx-background-color: -fx-background;
+}
+
+
+/* Ensure checkbox text color in AddFileController */
+.table-row-cell:selected .check-box .text {
+    -fx-fill: #8B4513; /* Brown */
+}
+
+.accepted-checkbox:selected .box {
+    -fx-background-color: #90EE90; /* Green */
+}
+
+.refused-checkbox:selected .box {
+    -fx-background-color: #FF4040; /* Red */
+}
+
+.hold-checkbox:selected .box {
+    -fx-background-color: #FFFF00; /* Yellow */
+}
+
+.accepted-checkbox .box,
+.refused-checkbox .box,
+.hold-checkbox .box {
+    -fx-background-color: transparent;
+}
+
+
+
+
+
+
+
+/* Existing table styles */
+.table-view {
+    -fx-background-color: white;
+    -fx-background-radius: 15 15 0 0; /* top-left, top-right, bottom-right, bottom-left */
+    -fx-padding: 5;
+}
+.table-view {
+    -fx-background-color: transparent;
+}
+.table-view .corner {
+    -fx-background-color: white;
+    -fx-background-radius: 15 15 0 0;
+}
+.table-view .column-header-background {
+    -fx-background-color: #9fb0b2;
+    -fx-padding: 8;
+}
+.table-view .column-header {
+    -fx-background-color: #d6d8db;
+    -fx-border-color: #ffffff;
+}
+.table-view .filler {
+    -fx-background-color: white;
+}
+.table-view .table-cell {
+    -fx-text-fill: #000000;
+    -fx-border-color: #cccbcb;
+    -fx-border-width: 0 0 0.6px 0.6px; /* top right bottom left */
+    -fx-alignment: CENTER; /* Ensure cell content is centered */
+}
+
+/* Alternating row colors for zebra striping */
+.table-view .table-row-cell:odd {
+    -fx-background-color: #ffffff; /* White for odd rows */
+}
+.table-view .table-row-cell:even {
+    -fx-background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+/* Add light borders between department columns */
+.table-view .department-column .column-header {
+    -fx-border-color: #cccbcb;
+    -fx-border-width: 0 0.6px 0 0; /* top right bottom left */
+}
+
+/* Remove right border for the last department column */
+.table-view .last-department-column .column-header {
+    -fx-border-width: 0 0 0 0; /* Remove right border */
+}
+
+/* Ensure selected row is highlighted with light cyan */
+.table-view .table-row-cell:selected {
+    -fx-background-color: #B0E0E6 !important; /* Light cyan with high priority */
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #000000 !important; /* Black text */
+}
+
+/* Ensure cells within selected row maintain text color and content visibility */
+.table-view .table-row-cell:selected .table-cell {
+    -fx-background-color: transparent !important; /* Prevent cell background from overriding */
+    -fx-text-fill: #000000 !important; /* Black text */
+}
+
+
+.title-box {
+    -fx-background-color: linear-gradient(to right, #d6d8db, #9fb0b2);
+    -fx-padding: 7 10 7 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-border-color: #00727d;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-radius: 10;
+}
+
+.title-label {
+    -fx-font-size: 22px;
+    -fx-text-fill: #00727d;
+    -fx-font-weight: bold;
+}
+.search_controlPage{
+    -fx-background-radius: 15;
+}
+.combo-01{
+    /*-fx-background-color: rgb(218, 161, 128);*/
+    -fx-border-radius: 5 ;
+    -fx-background-radius: 5 ;
+    -fx-border-color: #f3f1f1;
+    -fx-border-width: 0px 0px 0.8px 0.8px;
+}
+.button-15 {
+    -fx-background-radius: 5;
+    -fx-background-color: #4DB6AC;
+    -fx-text-fill: white;
+}
+.button-15:hover {
+    -fx-background-color: #00897B;
+}
+
+.button-16 {
+    -fx-background-radius: 5;
+    -fx-background-color: #81C784;
+    -fx-text-fill: white;
+}
+.button-16:hover {
+    -fx-background-color: #519657;
+}
+
+.button-17 {
+    -fx-background-radius: 5;
+    -fx-background-color: #64B5F6;
+    -fx-text-fill: white;
+}
+.button-17:hover {
+    -fx-background-color: #1E88E5;
+}
+
+.button-18 {
+    -fx-background-radius: 5;
+    -fx-background-color: #FFD54F;
+    -fx-text-fill: black;
+}
+.button-18:hover {
+    -fx-background-color: #FBC02D;
+}
+
+.button-19 {
+    -fx-background-radius: 5;
+    -fx-background-color: #FF8A65;
+    -fx-text-fill: white;
+}
+.button-19:hover {
+    -fx-background-color: #F4511E;
+}
+.button-20 {
+    -fx-background-radius: 5;
+    -fx-background-color: #cfe9e8;
+    -fx-text-fill: #000000;
+}
+.button-20:hover {
+    -fx-background-color: #B2DFDB;
+}
+
+
+

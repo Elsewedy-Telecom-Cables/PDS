@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="556.0" prefWidth="862.0" style="-fx-background-color: #fffbee;" stylesheets="@style2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.pdsapp.controllers.MainController">
+   <children>
+      <HBox alignment="CENTER" layoutX="27.0" layoutY="2.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="836.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
+         <children>
+            <VBox prefHeight="66.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="welcome_lbl" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="289.0">
+                     <font>
+                        <Font name="Montserrat Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="date_lbl" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="288.0">
+                     <font>
+                        <Font name="Montserrat Bold" size="11.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="11.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="370.0" text="Process Department">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="shift_label" alignment="CENTER" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="352.0" text="Shift : One" textFill="#dd3615" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Montserrat Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="67.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="logo_ImageView" fitHeight="51.0" fitWidth="130.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" scaleZ="1.1" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets right="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="40.0" layoutY="69.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="56.0" prefWidth="334.0" text="PDS Project" textFill="#dd3615">
+               <font>
+                  <Font name="Montserrat Bold" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ImageView fx:id="pds_image_view" fitHeight="261.0" fitWidth="650.0" layoutX="132.0" layoutY="153.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+      <HBox alignment="CENTER" layoutX="15.0" layoutY="461.0" prefHeight="60.0" prefWidth="855.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="150.0">
+               <children>
+                  <Button fx:id="users_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openViewUsers" prefHeight="35.0" prefWidth="140.0" styleClass="button-21" text="Users   ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-users" iconSize="10" />
+                     </graphic>
+                     <font>
+                        <Font name="Montserrat Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="246.0">
+               <children>
+                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Add-Update Pds Data" textFill="WHITE">
+                     <font>
+                        <Font name="Montserrat Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="203.0">
+               <children>
+                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="157.0" styleClass="button-24" text="Export PDS" textFill="WHITE">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="160.0">
+               <children>
+                  <Button fx:id="prepare_data_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openPrepareData" prefHeight="35.0" prefWidth="150.0" styleClass="button-23" text="Database  " textFill="WHITE">
+                     <font>
+                        <Font name="Montserrat Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-database" />
+                     </graphic>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

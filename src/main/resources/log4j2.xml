@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <!-- Appenders define where the logs are written -->
+    <Appenders>
+
+        <!-- Console Appender with custom pattern layout -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- Pattern Layout for logging to console -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level - %msg%n%throwable" />
+        </Console>
+
+        <!-- RollingFile Appender that logs to file and rolls over the logs after reaching a certain size -->
+        <RollingFile name="INFOFile" fileName="../logs/Info/app.log" filePattern="../logs/Info/app-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level - %msg%n%throwable" />
+            <Policies>
+                <!-- Time-based rollover: rolls over when a new day starts -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10MB" /> <!-- Roll over after 10MB -->
+            </Policies>
+        </RollingFile>
+
+        <!-- RollingFile Appender for SQL Logs -->
+        <RollingFile name="SQLFile" fileName="../logs/DB/sql.log" filePattern="../logs/DB/app-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level - %msg%n%throwable" />
+            <Policies>
+                <!-- Time-based rollover: rolls over when a new day starts -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10MB" /> <!-- Roll over after 10MB -->
+            </Policies>
+        </RollingFile>
+
+        <!-- RollingFile Appender for Error Logs -->
+        <RollingFile name="ErrorFile" fileName="../logs/Error/error.log" filePattern="../logs/Error/app-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level - %msg%n%throwable" />
+            <Policies>
+                <!-- Time-based rollover: rolls over when a new day starts -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10MB" /> <!-- Roll over after 10MB -->
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <!-- Loggers define the logging levels and appenders -->
+    <Loggers>
+
+        <!-- Root logger - for general logging across the application -->
+        <Root level="info">
+            <!-- Attach Console and File appenders to the Root Logger -->
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="INFOFile" />
+        </Root>
+
+        <!-- Logger for SQL Logs -->
+        <Logger name="SQL" level="debug" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="SQLFile"/>
+        </Logger>
+        <!-- Logger for Error Logs -->
+        <Logger name="errors" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="ErrorFile"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>
