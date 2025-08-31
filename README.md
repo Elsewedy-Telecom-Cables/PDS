@@ -28,11 +28,4 @@ JavaFx POS System
 
 
 
-#online database
-- https://console.aiven.io/login
-Database name : defaultdb
-Host: mysql-2087c03b-ahmedaly-7d1a.j.aivencloud.com
-Port: 20845
-User: avnadmin
-Password : AVNS_LysEsx1JKuRH7wVKPpx
-SSL mode : REQUIRED
+
