@@ -363,4 +363,10 @@
     -fx-text-fill: #00727d;
     -fx-font-weight: bold;
 }
+.dialog-pane .content.label {
+    -fx-font-family: "Noto Color Emoji", "Segoe UI Emoji";
+    -fx-font-size: 14px;
+}
+
+
 

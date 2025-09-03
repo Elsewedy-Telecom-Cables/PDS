@@ -6,7 +6,7 @@
 
         <!-- Console Appender with custom pattern layout -->
         <Console name="Console" target="SYSTEM_OUT">
-            <!-- Pattern Layout for logging to console -->
+            <!-- Pattern Layout for Logging to console -->
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level - %msg%n%throwable" />
         </Console>
 
@@ -42,10 +42,10 @@
 
     </Appenders>
 
-    <!-- Loggers define the logging levels and appenders -->
+    <!-- Loggers define the Logging levels and appenders -->
     <Loggers>
 
-        <!-- Root logger - for general logging across the application -->
+        <!-- Root logger - for general Logging across the application -->
         <Root level="info">
             <!-- Attach Console and File appenders to the Root Logger -->
             <AppenderRef ref="Console" />

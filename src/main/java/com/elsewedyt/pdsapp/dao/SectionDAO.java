@@ -79,6 +79,28 @@ public class SectionDAO {
             return generatedId;
         }
 
+    // Insert a new section
+//    public static boolean insertSectionBoolean(Section section) {
+//        String query = "INSERT INTO pds.dbo.sections (section_name) VALUES (?)";
+//        // int generatedId = -1;
+//
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+//
+//            ps.setString(1, section.getSectionName());
+//            return   ps.executeUpdate();
+//
+//                        return ps.executeUpdate() > 1 ;
+//                        //  generatedId = rs.getInt(1);
+//
+//            }
+//
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", SectionDAO.class.getName(), "insertSection", e, "sql", query);
+//        }
+//        return false;
+//    }
+
         // Update an existing section
         public static boolean updateSection(Section section) {
             String query = "UPDATE pds.dbo.sections SET section_name = ? WHERE section_id = ?";

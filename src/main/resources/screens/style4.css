@@ -773,31 +773,43 @@
 }
 
 
+/* Export Excel button */
 .button.export-button {
-    -fx-background-color: #5BC0DE;
+    -fx-background-color: #28a745;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, rgba(52, 47, 47, 0.75), 4, 0, 0, 1);
+    -fx-font-weight: bold;
+}
+
+.button.export-button .ikonli-font-icon {
+    -fx-icon-color: #ffffff;
 }
 
 .button.export-button:hover {
-    -fx-background-color: #f1f4f6;
-    -fx-text-fill: #0b304e;
+    -fx-background-color: #218838;
+    -fx-cursor: Hand;
 }
 
 .button.export-button:pressed {
-    -fx-background-color: #0090bb;
-    -fx-text-fill: white;
+    -fx-background-color: #1e7e34;
 }
 
-
+/* Import Excel button */
 .button.import-button {
-    -fx-background-color: #A597C1;
+    -fx-background-color: #17a2b8;
     -fx-text-fill: white;
+    -fx-font-weight: bold;
 }
+
 
 .button.import-button:hover {
-    -fx-background-color: #8e7abf;
+    -fx-background-color: #138496;
+    -fx-cursor: Hand;
 }
+
+.button.import-button:pressed {
+    -fx-background-color: #117a8b;
+}
+
 
 .title-box {
     -fx-background-color: linear-gradient(to right, #e0e1e3, #c8cccf); /* رمادي فاتح مائل لفضي */
@@ -814,6 +826,12 @@
     -fx-text-fill: #444444; /* رمادي داكن */
     -fx-font-weight: bold;
 }
+.dialog-pane .content.label {
+    -fx-font-family: "Noto Color Emoji", "Segoe UI Emoji";
+    -fx-font-size: 14px;
+}
+
+
 
 
 

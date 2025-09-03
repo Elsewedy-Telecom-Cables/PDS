@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javax.swing.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -57,6 +58,8 @@ public class MainController implements Initializable {
         ShiftManager.setSHIFT(LocalDateTime.now());
         String shiftName = ShiftManager.SHIFT_NAME;
         shift_label.setText("Shift : " + shiftName);
+
+
 
         // Load and set company logo
         Image img = new Image(MainController.class.getResourceAsStream("/images/company_logo.png"));
@@ -107,12 +110,14 @@ public class MainController implements Initializable {
     @FXML
     void openAddPdsData(ActionEvent event) {
         CLOSE(event);
-       // OPEN_PREPARE_DATA_PAGE();
+        OPEN_ADD_UPDATE_PDS_DATA();
     }
     @FXML
     void openExportPds(ActionEvent event) {
-        CLOSE(event);
-        // OPEN_PREPARE_DATA_PAGE();
+       WindowUtils.ALERT("Info", "Work Still Progress️", ALERT_INFORMATION);
+         CLOSE(event);
+         OPEN_EXPORT_PDS_DATA();
+
     }
 
 

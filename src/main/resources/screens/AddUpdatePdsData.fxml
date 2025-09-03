@@ -5,20 +5,18 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="704.0" prefWidth="1401.0" stylesheets="@style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.toolingapp.controllers.MachineSpeedsWithoutToolsController">
+<AnchorPane fx:id="rootPane" prefHeight="704.0" prefWidth="1401.0" stylesheets="@style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.pdsapp.controllers.AddUpdatePdsDataController">
    <children>
       <HBox alignment="TOP_CENTER" layoutX="7.2" layoutY="16.0" prefHeight="34.0" prefWidth="1387.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="16.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="550.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="receivePage_btn" mnemonicParsing="false" onAction="#openReceivePage" prefWidth="140.0" styleClass="button-16" text="Export Pds">
+                  <Button fx:id="openExportPds_btn" mnemonicParsing="false" onAction="#openExportPdsPage" prefWidth="140.0" styleClass="button-16" text="Export Pds">
                      <font>
                         <Font name="Montserrat Bold" size="14.0" />
                      </font>
@@ -70,7 +68,7 @@
                                     <Font name="Montserrat Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="work_order_textF" alignment="CENTER" onAction="#getWorkOrderData" prefHeight="32.0" prefWidth="150.0" styleClass="input3" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="work_order_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onAction="#getWorkOrderData" prefHeight="32.0" prefWidth="150.0" styleClass="input3" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -102,7 +100,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="stage_desc_textF" alignment="CENTER" onKeyPressed="#filterByCableSize" prefHeight="32.0" prefWidth="650.0" styleClass="input3" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="stage_desc_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="650.0" styleClass="input3" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -126,9 +124,9 @@
       </HBox>
       <VBox layoutX="14.0" layoutY="139.2" prefHeight="560.0" prefWidth="1385.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="139.0">
          <children>
-            <HBox prefHeight="194.0" prefWidth="1386.0">
+            <HBox prefHeight="194.0" prefWidth="2000.0">
                <children>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="216.0" prefWidth="500.0" styleClass="box-12">
                      <children>
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
                            <children>
@@ -141,7 +139,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="90.0" text="Machine" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -149,41 +147,40 @@
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="assembly_machine_Comb" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
+                              <ComboBox fx:id="assemblyMachine_Comb" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets right="20.0" />
                                  </HBox.margin>
                               </ComboBox>
+                              <Button mnemonicParsing="false" onAction="#saveAssemblyRecord" prefHeight="28.0" prefWidth="75.0" styleClass="button-28" text="Save">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="assembly_exportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#assembly_exportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
+                                    <Button fx:id="assemblyExportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#assemblyExportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
                                        <font>
                                           <Font name="Montserrat Bold" size="12.0" />
                                        </font>
-                                       <graphic>
-                                          <ImageView fx:id="excel_image" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="assembly_importExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#assembly_importExcel" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
+                                    <Button fx:id="assemblyImportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#assemblyImportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="import-button" text="Import Excel" textFill="#08743b">
                                        <font>
                                           <Font name="Montserrat Bold" size="12.0" />
                                        </font>
-                                       <graphic>
-                                          <ImageView fx:id="excel_image" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
                                        <HBox.margin>
-                                          <Insets />
+                                          <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -192,11 +189,11 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="216.0" prefWidth="500.0" styleClass="box-12">
                      <children>
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
                            <children>
-                              <Label text="Assembly Stage">
+                              <Label text="Braid Stage">
                                  <font>
                                     <Font name="Montserrat Bold" size="16.0" />
                                  </font>
@@ -205,7 +202,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="90.0" text="Machine" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -213,7 +210,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
+                              <ComboBox fx:id="braidMachine_Comb" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -224,13 +221,10 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
+                                    <Button fx:id="braidExportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#braidExportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
                                        <font>
                                           <Font name="Montserrat Bold" size="12.0" />
                                        </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -239,15 +233,12 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
+                                    <Button fx:id="braidImportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#braidImportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="import-button" text="Import Excel" textFill="#08743b">
                                        <font>
                                           <Font name="Montserrat Bold" size="12.0" />
                                        </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
                                        <HBox.margin>
-                                          <Insets />
+                                          <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -256,479 +247,17 @@
                         </HBox>
                      </children>
                      <HBox.margin>
-                        <Insets left="40.0" right="40.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image1122" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image11221" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
                   </VBox>
                </children>
             </HBox>
             <HBox prefHeight="194.0" prefWidth="1386.0">
-               <children>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image1" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image11" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image11" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image112" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="40.0" right="40.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image112" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image1121" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
                <VBox.margin>
                   <Insets bottom="15.0" top="15.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="194.0" prefWidth="1386.0">
-               <children>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image11" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image111" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image111" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image1111" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="40.0" right="40.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="216.0" prefWidth="450.0" styleClass="box-12" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
-                           <children>
-                              <Label text="Assembly Stage">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="100.0" text="Machine" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="334.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image1111" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Import Excel" textFill="#08743b">
-                                       <font>
-                                          <Font name="Montserrat Bold" size="12.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="fo_report_excel_image11111" fitHeight="25.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="194.0" prefWidth="1386.0" />
          </children>
       </VBox>
    </children>

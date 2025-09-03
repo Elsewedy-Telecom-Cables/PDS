@@ -12,9 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.util.function.Consumer;
 
@@ -157,7 +155,7 @@ public class WindowUtils {
     public static final String ADD_USER_PAGE = "/screens/AddUser.fxml";
     public static final String  ADD_PREPARE_DATA = "/screens/AddPrepareData.fxml";
     public static final String  ADD_UPDATE_PDS_DATA = "/screens/AddUpdatePdsData.fxml";
-    public static final String  EXPORT_PDS_DATA = "/screens/ExportPdsData.fxml";
+    public static final String  EXPORT_PDS_DATA = "/screens/ExportPds.fxml";
 
 
 
@@ -254,7 +252,7 @@ public class WindowUtils {
     public static void OPEN_ADD_UPDATE_PDS_DATA() {
         try {
             OPEN_WINDOW_FULL_SCREEN(
-                    ADD_PREPARE_DATA,
+                    ADD_UPDATE_PDS_DATA,
                     () -> OPEN_MAIN_PAGE()
             );
         } catch (Exception ex) {
@@ -264,7 +262,7 @@ public class WindowUtils {
     public static void OPEN_EXPORT_PDS_DATA() {
         try {
             OPEN_WINDOW_FULL_SCREEN(
-                    ADD_PREPARE_DATA,
+                    EXPORT_PDS_DATA,
                     () -> OPEN_MAIN_PAGE()
             );
         } catch (Exception ex) {

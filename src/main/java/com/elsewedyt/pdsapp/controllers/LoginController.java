@@ -20,9 +20,10 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import static com.elsewedyt.pdsapp.services.WindowUtils.*;
 
-public class LoginController  implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private Label app_name_lable;
@@ -45,7 +46,7 @@ public class LoginController  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> password_passF.requestFocus());
         Image logoImg = new Image(LoginController.class.getResourceAsStream("/images/company_logo.png"));
-         logo_image_view.setImage(logoImg);
+        logo_image_view.setImage(logoImg);
         sign_in_btn.setCursor((Cursor.HAND));
         user_name_txtF.setText(LoggingSetting.getCurrentUsername());
 
@@ -53,7 +54,7 @@ public class LoginController  implements Initializable {
 
     @FXML
     void login(ActionEvent event) {
-                String username = user_name_txtF.getText().trim();
+        String username = user_name_txtF.getText().trim();
         String password = password_passF.getText().trim();
 
 
@@ -80,7 +81,7 @@ public class LoginController  implements Initializable {
 
         try {
             UserContext.setCurrentUser(user);
-          //  LoggingSetting.saveLastUsername(username);
+            //  LoggingSetting.saveLastUsername(username);
             CLOSE(event);
             OPEN_MAIN_PAGE();
         } catch (Exception ex) {
