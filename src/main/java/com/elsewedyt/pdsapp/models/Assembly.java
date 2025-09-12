@@ -23,7 +23,7 @@ public class Assembly {
         this.notes = notes ;
     }
 
-    // مُنشئ بدون ID للإدخال
+    // For Creation Without ID For Import  Excel
     public Assembly(String stageDescription, int machineId, Integer userId,
                     Double lineSpeed, Double traverseLay,String notes) {
         this(0, stageDescription, machineId, userId, lineSpeed, traverseLay,notes);

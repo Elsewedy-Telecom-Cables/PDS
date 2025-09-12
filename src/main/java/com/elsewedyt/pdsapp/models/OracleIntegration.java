@@ -183,20 +183,6 @@ public class OracleIntegration {
         this.soBatch = soBatch;
     }
 
-//    @Override
-//    public String toString() {
-//        return "OracleIntegration{" +
-//                "workOrder=" + workOrder +
-//                ", wo='" + wo + '\'' +
-//                ", organization_name='" + organization_name + '\'' +
-//                ", item_size='" + item_size + '\'' +
-//                ", item='" + item + '\'' +
-//                ", item_desc='" + item_desc + '\'' +
-//                ", item_tds='" + item_tds + '\'' +
-//                '}';
-//    }
-
-
     @Override
     public String toString() {
         return "OracleIntegration{" +

@@ -41,7 +41,7 @@ public class AssemblyExcelService {
                 if (a.getTraverseLay() != null) row.createCell(5).setCellValue(a.getTraverseLay());
                 if (a.getNotes() != null) row.createCell(6).setCellValue(a.getNotes());
 
-                // عمود action نخليه فاضي افتراضيًا
+                //  Action Column Empty As Default
                 row.createCell(7).setCellValue(a.getAction() != null ? a.getAction() : "");
             }
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="704.0" prefWidth="1401.0" stylesheets="@style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.pdsapp.controllers.AddUpdatePdsDataController">
+<AnchorPane fx:id="rootPane" prefHeight="704.0" prefWidth="1442.0" stylesheets="@style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.pdsapp.controllers.AddUpdatePdsDataController">
    <children>
       <HBox alignment="TOP_CENTER" layoutX="7.2" layoutY="16.0" prefHeight="34.0" prefWidth="1387.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="16.0">
          <children>
@@ -137,7 +137,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0" VBox.vgrow="ALWAYS">
                            <children>
                               <Label alignment="CENTER" prefHeight="22.0" prefWidth="90.0" text="Machine" HBox.hgrow="ALWAYS">
                                  <font>
@@ -156,6 +156,9 @@
                                  <font>
                                     <Font name="Montserrat Bold" size="14.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
@@ -212,9 +215,17 @@
                               </Label>
                               <ComboBox fx:id="braidMachine_Comb" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets right="20.0" />
                                  </HBox.margin>
                               </ComboBox>
+                              <Button mnemonicParsing="false" onAction="#saveBraidRecord" prefHeight="28.0" prefWidth="75.0" styleClass="button-28" text="Save">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
@@ -249,6 +260,72 @@
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="216.0" prefWidth="500.0" styleClass="box-12">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="625.0">
+                           <children>
+                              <Label text="Stranding Stage">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="625.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="90.0" text="Machine" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="strandingMachine_Comb" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <Button mnemonicParsing="false" onAction="#saveStrandingRecord" prefHeight="28.0" prefWidth="75.0" styleClass="button-28" text="Save">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="625.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="strandingExportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#strandingExportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="export-button" text="Export Excel" textFill="#08743b">
+                                       <font>
+                                          <Font name="Montserrat Bold" size="12.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="strandingImportExcel_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#strandingImportExcel" prefHeight="30.0" prefWidth="151.0" styleClass="import-button" text="Import Excel" textFill="#08743b">
+                                       <font>
+                                          <Font name="Montserrat Bold" size="12.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
                   </VBox>
                </children>
             </HBox>

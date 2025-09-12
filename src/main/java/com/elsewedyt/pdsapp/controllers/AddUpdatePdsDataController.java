@@ -40,12 +40,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class AddUpdatePdsDataController implements Initializable {
-    @FXML private Button assemblyExportExcel_btn;
-    @FXML private Button assemblyImportExcel_btn;
-    @FXML private ComboBox<Machine> assemblyMachine_Comb;
-    @FXML private Button braidExportExcel_btn;
-    @FXML private Button braidImportExcel_btn;
-    @FXML private ComboBox<Machine> braidMachine_Comb;
+    // Shared All Page
     @FXML private Button clear_search_work_order_btn;
     @FXML private Button openExportPds_btn;
     @FXML private Button refresh_btn;
@@ -54,8 +49,30 @@ public class AddUpdatePdsDataController implements Initializable {
     @FXML private TextField stage_desc_textF;
     @FXML private Label wo_lbl;
     @FXML private TextField work_order_textF;
+
+    // Assembly
+    @FXML private Button assemblyExportExcel_btn;
+    @FXML private Button assemblyImportExcel_btn;
+    @FXML private ComboBox<Machine> assemblyMachine_Comb;
+
+    // Braid
+    @FXML private Button braidExportExcel_btn;
+    @FXML private Button braidImportExcel_btn;
+    @FXML private ComboBox<Machine> braidMachine_Comb;
+
+    // Stranding
+    @FXML private ComboBox<Machine> strandingMachine_Comb;
+    @FXML private Button strandingExportExcel_btn;
+    @FXML private Button strandingImportExcel_btn;
+
+
+
+
+    // Lists Init and Others
     ObservableList<Machine> listAssemblyMachines;
     ObservableList<Machine> listBraidMachines;
+    ObservableList<Machine> listStrandingMachines;
+
 
 
     @Override
@@ -63,22 +80,25 @@ public class AddUpdatePdsDataController implements Initializable {
         Platform.runLater(() -> wo_lbl.requestFocus());
         work_order_textF.setText("STC-2025-");
         int userId = UserContext.getCurrentUser().getUserId() ;
-         // Add Excel Icons To All Excel Buttons
-        addExcelIcon(assemblyImportExcel_btn);
-        addExcelIcon(assemblyExportExcel_btn);
+
 
         initCombo();
-        //assembly_machine_Comb
-        // Ai  هل يمكن استخدام Streams للحصول على المكن بواسطة stage id بديلا عن DAO  ام من الافضل
+        initExcelIcon();
+
 
     }
+
 
     private void initCombo(){
         listAssemblyMachines = MachineDAO.getMachinesByStageId(2);  // Assembly
         assemblyMachine_Comb.setItems(listAssemblyMachines);
         listBraidMachines = MachineDAO.getMachinesByStageId(4);  // Braid
         braidMachine_Comb.setItems(listBraidMachines);
+        listStrandingMachines = MachineDAO.getMachinesByStageId(6);  // Stranding
+        strandingMachine_Comb.setItems(listStrandingMachines);
     }
+
+    // Assembly Saved - Export - Import
     @FXML
     void saveAssemblyRecord(ActionEvent event) {
         try {
@@ -219,6 +239,12 @@ public class AddUpdatePdsDataController implements Initializable {
         }
     }
 
+    // Braid Saved - Export - Import
+
+    @FXML
+    void saveBraidRecord(ActionEvent event){
+
+    }
 
     @FXML
     void braidExportExcel(ActionEvent event) {
@@ -228,6 +254,20 @@ public class AddUpdatePdsDataController implements Initializable {
     void braidImportExcel(ActionEvent event) {
 
     }
+    // Standing Saved - Export - Import
+    @FXML
+    void saveStrandingRecord(ActionEvent event){
+
+    }
+    @FXML
+    void strandingExportExcel(ActionEvent event){
+
+    }
+    @FXML
+    void strandingImportExcel(ActionEvent event){
+
+    }
+
 
 
     @FXML
@@ -303,6 +343,15 @@ public class AddUpdatePdsDataController implements Initializable {
     private Integer getCellInt(Row row, int colIndex) {
         Double d = getCellDouble(row, colIndex);
         return d != null ? d.intValue() : null;
+    }
+    private void initExcelIcon(){
+        // Add Excel Icons To All Excel Buttons
+        addExcelIcon(assemblyImportExcel_btn);
+        addExcelIcon(assemblyExportExcel_btn);
+        addExcelIcon(braidExportExcel_btn);
+        addExcelIcon(braidImportExcel_btn);
+        addExcelIcon(strandingExportExcel_btn);
+        addExcelIcon(strandingImportExcel_btn);
     }
 
 }

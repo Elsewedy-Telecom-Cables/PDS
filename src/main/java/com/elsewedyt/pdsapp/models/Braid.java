@@ -24,7 +24,7 @@ public class Braid {
         this.pitch = pitch;
         this.notes = notes;
     }
-
+    // For Creation Without ID For Import  Excel
     public Braid(String stageDescription, int machineId, Integer userId,
                  Double deckSpeed, Double speed, Double pitch,String notes) {
         this(0, stageDescription, machineId, userId, deckSpeed, speed, pitch ,notes);
