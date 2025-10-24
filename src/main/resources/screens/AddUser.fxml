@@ -30,7 +30,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <FontIcon iconColor="WHITE" iconLiteral="fa-check" iconSize="15" layoutX="453.0" layoutY="466.0" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-check" iconSize="15" layoutX="453.0" layoutY="466.0" />
             <VBox alignment="CENTER_LEFT" layoutX="21.0" layoutY="3.0" prefHeight="424.0" prefWidth="116.0">
                <children>
                   <Label contentDisplay="RIGHT" prefHeight="39.0" prefWidth="97.0" text="Emp Code">

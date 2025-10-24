@@ -94,7 +94,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconLiteral="fa-eraser" />
+                                    <FontIcon iconLiteral="fas-eraser" />
                                  </graphic>
                               </Button>
                               <TextField fx:id="filter_machines_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_machines" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
@@ -117,7 +117,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconLiteral="fa-plus" />
+                                    <FontIcon iconLiteral="fas-plus" />
                                  </graphic>
                               </Button>
                               <TextField fx:id="machine_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add machine name" styleClass="input" HBox.hgrow="ALWAYS">
@@ -143,7 +143,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconLiteral="fa-check" />
+                                    <FontIcon iconLiteral="fas-check" />
                                  </graphic>
                               </Button>
                               <TextField fx:id="update_machine_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update machine name" styleClass="input" HBox.hgrow="ALWAYS">
@@ -211,7 +211,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconLiteral="fa-eraser" />
+                                    <FontIcon iconLiteral="fas-eraser" />
                                  </graphic>
                               </Button>
                               <TextField fx:id="filter_section_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_section" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
@@ -234,7 +234,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconLiteral="fa-plus" />
+                                    <FontIcon iconLiteral="fas-plus" />
                                  </graphic>
                               </Button>
                               <TextField fx:id="section_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add section name" styleClass="input" HBox.hgrow="ALWAYS">
@@ -260,7 +260,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconLiteral="fa-check" />
+                                    <FontIcon iconLiteral="fas-check" />
                                  </graphic>
                               </Button>
                               <TextField fx:id="update_section_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update section name" styleClass="input" HBox.hgrow="ALWAYS">

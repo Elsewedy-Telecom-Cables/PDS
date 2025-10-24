@@ -269,7 +269,7 @@ CREATE  TABLE pds.dbo.fo_sheathing (
                                        pos_no_6             decimal(10,5)      NULL,
                                        pos_no_7             decimal(10,5)      NULL,
                                        pos_no_8             decimal(10,5)      NULL,
-                                       pos_no_9             decimal(10,0)      NULL,
+                                       pos_no_9             decimal(10,5)      NULL,
                                        pos_no_10            decimal(10,5)      NULL,
                                        pos_no_11            decimal(10,5)      NULL,
                                        pos_no_12            decimal(10,5)      NULL,

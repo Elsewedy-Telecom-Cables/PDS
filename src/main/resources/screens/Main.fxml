@@ -84,7 +84,7 @@
                <children>
                   <Button fx:id="users_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openViewUsers" prefHeight="35.0" prefWidth="140.0" styleClass="button-21" text="Users   ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-users" iconSize="10" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-users" iconSize="10" />
                      </graphic>
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
@@ -97,7 +97,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="246.0">
                <children>
-                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Add-Update Pds Data" textFill="WHITE">
+                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Add-Update PDS Data" textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
@@ -120,7 +120,7 @@
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-database" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-database" />
                      </graphic>
                   </Button>
                </children>
