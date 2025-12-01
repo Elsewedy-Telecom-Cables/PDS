@@ -15,12 +15,15 @@ module com.elsewedyt.pdsapp {
     requires org.apache.poi.ooxml;
     requires com.fasterxml.jackson.databind;
     requires org.kordamp.ikonli.javafx;
-  
+    requires javafx.base;
+    requires javafx.graphics;
+    requires org.apache.poi.poi;
 
-    opens com.elsewedyt.pdsapp.controllers to javafx.fxml;
+
+    opens com.etc.pdsapp.controller to javafx.fxml;
     opens screens to javafx.fxml;
-    exports com.elsewedyt.pdsapp.controllers;
-    exports com.elsewedyt.pdsapp.models;
+    exports com.etc.pdsapp.controller;
+    exports com.etc.pdsapp.model;
 
 
 
