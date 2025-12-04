@@ -1,14 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.etc.pdsapp.controller.ExportPdsController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="680.0" prefWidth="1436.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.ExportPdsController">
+   <children>
+      <HBox alignment="CENTER" layoutX="37.0" layoutY="12.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="836.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <VBox prefHeight="66.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="welcome_lbl" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="289.0">
+                     <font>
+                        <Font name="Montserrat Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="date_lbl" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="288.0">
+                     <font>
+                        <Font name="Montserrat Bold" size="11.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="6.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="370.0" text="Export PDS Sheets">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="67.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="logo_ImageView" fitHeight="55.0" fitWidth="150.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="4.8" layoutY="71.0" prefHeight="64.0" prefWidth="1385.0" styleClass="box-13" AnchorPane.leftAnchor="4.8" AnchorPane.rightAnchor="4.7999999999999545">
+         <children>
+            <VBox alignment="CENTER" prefHeight="64.0" prefWidth="1383.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="1374.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="woLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="50.0" text="W.O" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="workOrderTextF" alignment="CENTER" onAction="#getPdsData" prefHeight="32.0" prefWidth="160.0" styleClass="input3" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="1.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearPdsData" prefHeight="29.0" prefWidth="80.0" style="-fx-background-radius: 15;" styleClass="delete-button" text="Clear" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="1.0" left="4.0" right="4.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#getPdsData" prefHeight="29.0" prefWidth="85.0" style="-fx-background-radius: 15;" styleClass="search-button" text="Search" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="4.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="90.0" text="Stage Des" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="stageDescriptionTextF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="780.0" styleClass="input3" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="4.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="192.0" prefHeight="109.0" prefWidth="1426.0">
+         <children>
+            <VBox prefHeight="110.0" prefWidth="348.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="543.0">
+                     <children>
+                        <Label text="Select Stages">
+                           <font>
+                              <Font name="Montserrat Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="625.0">
+                     <children>
+                        <ComboBox fx:id="stagesCombo" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="110.0" prefWidth="348.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="543.0">
+                     <children>
+                        <Label text="Machines">
+                           <font>
+                              <Font name="Montserrat Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="625.0">
+                     <children>
+                        <ComboBox fx:id="machinesCombo" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 14; -fx-font-weight: bold;" styleClass="input4" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearSelectStageAndMachine" prefHeight="29.0" prefWidth="70.0" style="-fx-background-radius: 15;" styleClass="delete-button" text="Clear">
+               <font>
+                  <Font name="Montserrat Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="25.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="202.0" prefWidth="1426.0">
+         <children>
+            <VBox prefHeight="216.0" prefWidth="500.0" styleClass="box-12">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="498.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="exportExcelBtn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportPdsExcel" prefHeight="38.0" prefWidth="170.0" styleClass="export-button2" text="Export PDS  " textFill="#08743b">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconColor="#00842c" iconLiteral="fas-file-excel" iconSize="22" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

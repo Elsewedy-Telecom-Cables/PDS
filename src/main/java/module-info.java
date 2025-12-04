@@ -1,4 +1,4 @@
-module com.elsewedyt.pdsapp {
+module com.etc.pdsapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.xml;

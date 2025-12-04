@@ -111,7 +111,6 @@ public class MainController implements Initializable {
 
     @FXML
     void openExportPds(ActionEvent event) {
-       WindowUtils.ALERT("Info", "Work Still Progress️", ALERT_INFORMATION);
          CLOSE(event);
          OPEN_EXPORT_PDS_DATA();
 

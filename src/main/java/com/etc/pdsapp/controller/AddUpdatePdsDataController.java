@@ -38,6 +38,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -63,11 +64,23 @@ public class AddUpdatePdsDataController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> woLabel.requestFocus());
+      //  Platform.runLater(() -> woLabel.requestFocus());
         workOrderTextF.setText("STC-2025-");
+        Platform.runLater(() -> {
+            workOrderTextF.requestFocus();
+            workOrderTextF.positionCaret(workOrderTextF.getText().length());
+        });
         int userId = UserContext.getCurrentUser().getUserId();
         initCombo();
         initExcelIcon();
+    }
+
+    private String normalize(String s) {
+        return s
+                .toLowerCase()
+                .replaceAll("[\\s]", "")        // Remove all spaces
+                .replaceAll("[\\[\\]\\(\\){}]", "") // Remove Brackets
+                .replaceAll("[^a-z0-9]", "");   // Remove all non-alphanumeric characters
     }
 
 
@@ -79,8 +92,9 @@ public class AddUpdatePdsDataController implements Initializable {
             Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
             Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
             String stageDesc = stageDescriptionTextF.getText();
+            String normalizedDesc = normalize(stageDesc);
 
-            if (selectedStage == null || selectedMachine == null || stageDesc.isEmpty()) {
+            if (selectedStage == null || selectedMachine == null || normalizedDesc.isEmpty()) {
                 WindowUtils.ALERT("Warning", "Stage, Machine, and Description are required", WindowUtils.ALERT_WARNING);
                 return;
             }
@@ -89,7 +103,7 @@ public class AddUpdatePdsDataController implements Initializable {
             switch (selectedStage.getStageId()) {
                 case 2: // Assembly
                     // Check duplicate
-                    if (assemblyDao.existsAssemblyRecord(stageDesc, selectedMachine.getMachineId())) {
+                    if (assemblyDao.existsAssemblyRecord(normalizedDesc, selectedMachine.getMachineId())) {
                         WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
                         return;
                     }
@@ -111,7 +125,7 @@ public class AddUpdatePdsDataController implements Initializable {
                     break;
                 case 4: // Braid
                     // Check duplicate
-                    if (braidDao.existsBraidRecord(stageDesc, selectedMachine.getMachineId())) {
+                    if (braidDao.existsBraidRecord(normalizedDesc, selectedMachine.getMachineId())) {
                         WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
                         return;
                     }
@@ -122,7 +136,7 @@ public class AddUpdatePdsDataController implements Initializable {
                     newBraid.setMachineId(selectedMachine.getMachineId());
                     newBraid.setUserId(userId);
 
-                    int braidGeneratedId = braidDao.insert(newBraid);
+                    int braidGeneratedId = braidDao.insertBraid(newBraid);
                     if (braidGeneratedId != -1) {
                         WindowUtils.ALERT("Success", "Braid record saved successfully", WindowUtils.ALERT_INFORMATION);
                         clearSearchWorkOrder();
@@ -164,7 +178,7 @@ public class AddUpdatePdsDataController implements Initializable {
                     AssemblyFile.exportToExcel(assemblies);
                 }
                 case BRAID -> {
-                    List<Braid> braids = braidDao.getAll();
+                    List<Braid> braids = braidDao.getAllBraids();
                     BraidFile.exportToExcel(braids);
                 }
                 default -> WindowUtils.ALERT("Info", stageType.getDisplayName() + " export coming soon", WindowUtils.ALERT_INFORMATION);
@@ -226,6 +240,23 @@ public class AddUpdatePdsDataController implements Initializable {
 
             processor.applyActions(data);
             WindowUtils.ALERT("Success", stageType.getDisplayName() + " data imported and applied successfully", WindowUtils.ALERT_INFORMATION);
+
+//            Map<Integer, String> results = processor.applyActions(data);
+//
+//            long inserted = results.values().stream().filter(v -> v.startsWith("Inserted")).count();
+//            long updated  = results.values().stream().filter(v -> v.startsWith("Updated")).count();
+//            long deleted  = results.values().stream().filter(v -> v.startsWith("Deleted")).count();
+//            long skipped  = results.values().stream().filter(v -> v.startsWith("Skipped")).count();
+//            long failed   = results.values().stream().filter(v -> v.startsWith("Failed") || v.startsWith("Error")).count();
+//
+//            String summary =
+//                    "Insert: " + inserted +
+//                            "\nUpdate: " + updated +
+//                            "\nDelete: " + deleted +
+//                            "\nSkipped (Duplicates): " + skipped +
+//                            "\nFailed: " + failed;
+//
+//            WindowUtils.ALERT("Import Summary", summary, WindowUtils.ALERT_INFORMATION);
 
         } catch (IOException e) {
             Logging.logException("ERROR", getClass().getName(), "importExcel", e);
@@ -342,18 +373,23 @@ public class AddUpdatePdsDataController implements Initializable {
         try {
             OracleIntegration subWorkOrderObj = null;
             String workOrder = workOrderTextF.getText();
-            String endpointUrl = ConfigLoader.getProperty("oracle.url") + workOrder;
+            String endpointUrl = ConfigLoader.getProperty("ORACLE.URL") + workOrder;
 
             OracleIntegration workOrderObj = ApiCaller.callApi(endpointUrl, "GET", null);
 
             String subWorkOrder = workOrderObj.getSoBatch();
             if (subWorkOrder != null && !subWorkOrder.equals(workOrder)) {
-                endpointUrl = ConfigLoader.getProperty("oracle.url") + subWorkOrder;
+                endpointUrl = ConfigLoader.getProperty("ORACLE.URL") + subWorkOrder;
                 subWorkOrderObj = ApiCaller.callApi(endpointUrl, "GET", null);
             }
 
             workOrderTextF.setText(workOrderObj.getWo());
             stageDescriptionTextF.setText(safeText(workOrderObj.getItem_desc()));
+
+            Platform.runLater(() -> {
+                workOrderTextF.requestFocus();
+                workOrderTextF.positionCaret(workOrderTextF.getText().length());
+            });
 
         } catch (Exception ex) {
             Logging.logException("ERROR", this.getClass().getName(), "getWorkOrderData", ex);

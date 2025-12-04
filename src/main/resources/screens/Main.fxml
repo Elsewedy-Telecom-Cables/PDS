@@ -95,11 +95,11 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="246.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="203.0">
                <children>
-                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Add-Update PDS Data" textFill="WHITE">
+                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="157.0" styleClass="button-24" text="Export PDS" textFill="WHITE">
                      <font>
-                        <Font name="Montserrat Bold" size="15.0" />
+                        <Font name="Montserrat Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
@@ -107,11 +107,11 @@
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="203.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="246.0">
                <children>
-                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="157.0" styleClass="button-24" text="Export PDS" textFill="WHITE">
+                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Add-Update PDS Data" textFill="WHITE">
                      <font>
-                        <Font name="Montserrat Bold" size="14.0" />
+                        <Font name="Montserrat Bold" size="15.0" />
                      </font>
                   </Button>
                </children>

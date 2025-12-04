@@ -1,5 +1,4 @@
 package com.etc.pdsapp.model;
-
 public class OracleIntegration {
     private OracleIntegration workOrder;
     private String machine ;

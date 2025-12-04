@@ -830,9 +830,31 @@
     -fx-font-family: "Noto Color Emoji", "Segoe UI Emoji";
     -fx-font-size: 14px;
 }
+
+.button.export-button2 {
+    -fx-background-color: white;
+    -fx-border-color: #08743b;
+    -fx-border-width: 2;
+    -fx-text-fill: #08743b;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.button.export-button2:hover {
+    -fx-background-color: #cbfce1;
+    -fx-text-fill: #08743b;
+}
+
+.button.export-button2:pressed {
+    -fx-background-color: #075c31; /*#0090bb , #075c31*/
+    -fx-text-fill: white;
+}
+
 .button:hover {
     -fx-cursor: hand;
 }
+
+
 
 
 

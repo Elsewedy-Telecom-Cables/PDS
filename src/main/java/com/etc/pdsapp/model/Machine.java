@@ -42,6 +42,6 @@ public class Machine {
 
     @Override
     public String toString() {
-        return machineName + " - ID(" +  machineId  +")" ;
+        return machineName ;
     }
 }

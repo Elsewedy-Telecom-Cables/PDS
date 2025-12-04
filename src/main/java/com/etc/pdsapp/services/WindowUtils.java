@@ -283,7 +283,7 @@ public class WindowUtils {
     }
     public static void OPEN_EXPORT_PDS_DATA() {
         try {
-            OPEN_WINDOW_FULL_SCREEN(
+            OPEN_WINDOW_FULL_SCREEN2(
                     EXPORT_PDS_DATA,
                     () -> OPEN_MAIN_PAGE()
             );
