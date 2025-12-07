@@ -3,6 +3,7 @@ package com.etc.pdsapp.controller;
 import com.etc.pdsapp.logging.Logging;
 import com.etc.pdsapp.model.UserContext;
 import com.etc.pdsapp.services.ShiftManager;
+import com.etc.pdsapp.services.UserService;
 import com.etc.pdsapp.services.WindowUtils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -80,31 +81,28 @@ public class MainController implements Initializable {
 
     @FXML
     void openViewUsers(ActionEvent event) {
-        // set Permissions
-        try {
-            // Super Admin and Department Manager
-            int role = UserContext.getCurrentUser().getRole();
-            if (role == 3) {
-                CLOSE(event);
-                OPEN_VIEW_USERS_PAGE();
-            } else {
-                WindowUtils.ALERT("Warning", "You are not authorized to access this page.", WindowUtils.ALERT_WARNING);
-                return;
-            }
-        }catch (Exception ex){
-            Logging.logException("ERROR", this.getClass().getName(), "openPrepareData Permission", ex);
+        if (!UserService.adminAuthorization()) {
+            return;
         }
+        CLOSE(event);
+        OPEN_VIEW_USERS_PAGE();
 
     }
 
     @FXML
     void openPrepareData(ActionEvent event) {
+        if (!UserService.adminAuthorization()) {
+            return;
+        }
                     CLOSE(event);
                     OPEN_PREPARE_DATA_PAGE();
         }
 
     @FXML
     void openAddPdsData(ActionEvent event) {
+        if (!UserService.adminAuthorization()) {
+            return;
+        }
         CLOSE(event);
         OPEN_ADD_UPDATE_PDS_DATA();
     }

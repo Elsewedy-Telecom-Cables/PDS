@@ -21,6 +21,7 @@ import com.etc.pdsapp.model.*;
 import com.etc.pdsapp.services.ApiCaller;
 import com.etc.pdsapp.services.ConfigLoader;
 import com.etc.pdsapp.services.WindowUtils;
+import com.etc.pdsapp.utils.StageUtils;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -84,78 +85,66 @@ public class AddUpdatePdsDataController implements Initializable {
     }
 
 
-    //  Saved - Export - Import
     @FXML
     void saveRecord(ActionEvent event) {
         try {
             int userId = UserContext.getCurrentUser().getUserId();
             Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
             Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
-            String stageDesc = stageDescriptionTextF.getText();
-            String normalizedDesc = normalize(stageDesc);
+            String stageDesc = stageDescriptionTextF.getText().trim();
 
-            if (selectedStage == null || selectedMachine == null || normalizedDesc.isEmpty()) {
+            if (selectedStage == null || selectedMachine == null || stageDesc.isEmpty()) {
                 WindowUtils.ALERT("Warning", "Stage, Machine, and Description are required", WindowUtils.ALERT_WARNING);
                 return;
             }
 
-            // Use switch based on stage ID (currently only handling Assembly, extend later)
-            switch (selectedStage.getStageId()) {
-                case 2: // Assembly
-                    // Check duplicate
-                    if (assemblyDao.existsAssemblyRecord(normalizedDesc, selectedMachine.getMachineId())) {
-                        WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
-                        return;
-                    }
+            String normalizedDesc = StageUtils.normalize(stageDesc);
+            StageType stageType = StageType.fromId(selectedStage.getStageId());
 
-                    // Insert new Assembly row
-                    Assembly newAssembly = new Assembly();
-                    newAssembly.setStageDescription(stageDesc);
-                    newAssembly.setMachineId(selectedMachine.getMachineId());
-                    newAssembly.setUserId(userId);
+            if (stageType == null) {
+                WindowUtils.ALERT("Info", "This stage is not supported yet", WindowUtils.ALERT_INFORMATION);
+                return;
+            }
 
-                    int generatedId = assemblyDao.insert(newAssembly);
-                    if (generatedId != -1) {
-                        WindowUtils.ALERT("Success", "Assembly record saved successfully", WindowUtils.ALERT_INFORMATION);
-                        clearSearchWorkOrder();
-                        machinesCombo.getSelectionModel().clearSelection();
-                    } else {
-                        WindowUtils.ALERT("Error", "Failed to save Assembly record", WindowUtils.ALERT_ERROR);
-                    }
-                    break;
-                case 4: // Braid
-                    // Check duplicate
-                    if (braidDao.existsBraidRecord(normalizedDesc, selectedMachine.getMachineId())) {
-                        WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
-                        return;
-                    }
+            // Generic duplicate check using the shared logic
+            boolean exists = switch (stageType) {
+                case ASSEMBLY -> assemblyDao.existsAssemblyRecord(normalizedDesc, selectedMachine.getMachineId());
+                case BRAID     -> braidDao.existsBraidRecord(normalizedDesc, selectedMachine.getMachineId());
+                default -> false; // Other stages not supported yet for saving
+            };
 
-                    // Insert new Braid row
-                    Braid newBraid = new Braid();
-                    newBraid.setStageDescription(stageDesc);
-                    newBraid.setMachineId(selectedMachine.getMachineId());
-                    newBraid.setUserId(userId);
+            if (exists) {
+                WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
+                return;
+            }
 
-                    int braidGeneratedId = braidDao.insertBraid(newBraid);
-                    if (braidGeneratedId != -1) {
-                        WindowUtils.ALERT("Success", "Braid record saved successfully", WindowUtils.ALERT_INFORMATION);
-                        clearSearchWorkOrder();
-                        machinesCombo.getSelectionModel().clearSelection();
-                    } else {
-                        WindowUtils.ALERT("Error", "Failed to save Braid record", WindowUtils.ALERT_ERROR);
-                    }
-                    break;
-                // Add cases for other stages like case 1: // Insulation, etc., with their respective DAOs
-                default:
-                    WindowUtils.ALERT("Info", "Stage not yet supported for saving", WindowUtils.ALERT_INFORMATION);
-                    break;
+            // Generic insert
+            boolean success = switch (stageType) {
+                case ASSEMBLY -> {
+                    Assembly a = new Assembly(stageDesc, selectedMachine.getMachineId(), userId);
+                    yield assemblyDao.insert(a) > 0;
+                }
+                case BRAID -> {
+                    Braid b = new Braid(stageDesc, selectedMachine.getMachineId(), userId);
+                    yield braidDao.insertBraid(b) > 0;
+                }
+                default -> false;
+            };
+
+            if (success) {
+                WindowUtils.ALERT("Success", stageType.getDisplayName() + " record saved successfully", WindowUtils.ALERT_INFORMATION);
+                clearSearchWorkOrder();
+                machinesCombo.getSelectionModel().clearSelection();
+                stageDescriptionTextF.clear();
+            } else {
+                WindowUtils.ALERT("Error", "Failed to save " + stageType.getDisplayName() + " record", WindowUtils.ALERT_ERROR);
             }
 
         } catch (Exception ex) {
-            Logging.logException("ERROR", this.getClass().getName(), "saveAssemblyRecord", ex);
+            Logging.logException("ERROR", this.getClass().getName(), "saveRecord", ex);
+            WindowUtils.ALERT("Error", "Unexpected error while saving record", WindowUtils.ALERT_ERROR);
         }
     }
-
 
     @FXML
     void exportExcel(ActionEvent event) {
@@ -168,21 +157,16 @@ public class AddUpdatePdsDataController implements Initializable {
 
             StageType stageType = StageType.fromId(selectedStage.getStageId());
             if (stageType == null) {
-                WindowUtils.ALERT("Info", "Stage not yet supported for export", WindowUtils.ALERT_INFORMATION);
+                WindowUtils.ALERT("Info", "Stage not supported for export yet", WindowUtils.ALERT_INFORMATION);
                 return;
             }
 
             switch (stageType) {
-                case ASSEMBLY -> {
-                    List<Assembly> assemblies = assemblyDao.getAll();
-                    AssemblyFile.exportToExcel(assemblies);
-                }
-                case BRAID -> {
-                    List<Braid> braids = braidDao.getAllBraids();
-                    BraidFile.exportToExcel(braids);
-                }
-                default -> WindowUtils.ALERT("Info", stageType.getDisplayName() + " export coming soon", WindowUtils.ALERT_INFORMATION);
+                case ASSEMBLY -> AssemblyFile.exportToExcel(assemblyDao.getAll());
+                case BRAID    -> BraidFile.exportToExcel(braidDao.getAllBraids());
+                default -> WindowUtils.ALERT("Coming Soon", stageType.getDisplayName() + " export will be available soon", WindowUtils.ALERT_INFORMATION);
             }
+
         } catch (Exception e) {
             Logging.logException("ERROR", this.getClass().getName(), "exportExcel", e);
             WindowUtils.ALERT("Error", "Export failed: " + e.getMessage(), WindowUtils.ALERT_ERROR);
@@ -223,10 +207,8 @@ public class AddUpdatePdsDataController implements Initializable {
 
             @SuppressWarnings("unchecked")
             var excelService = (StageExcelService<Object>) handler;
-
             @SuppressWarnings("unchecked")
             var validator = (StageValidator<Object>) handler;
-
             @SuppressWarnings("unchecked")
             var processor = (StageProcessor<Object>) handler;
 
@@ -238,25 +220,14 @@ public class AddUpdatePdsDataController implements Initializable {
                 return;
             }
 
-            processor.applyActions(data);
-            WindowUtils.ALERT("Success", stageType.getDisplayName() + " data imported and applied successfully", WindowUtils.ALERT_INFORMATION);
+            boolean[] hasError = new boolean[1];
+            processor.applyActions(data, hasError);
 
-//            Map<Integer, String> results = processor.applyActions(data);
-//
-//            long inserted = results.values().stream().filter(v -> v.startsWith("Inserted")).count();
-//            long updated  = results.values().stream().filter(v -> v.startsWith("Updated")).count();
-//            long deleted  = results.values().stream().filter(v -> v.startsWith("Deleted")).count();
-//            long skipped  = results.values().stream().filter(v -> v.startsWith("Skipped")).count();
-//            long failed   = results.values().stream().filter(v -> v.startsWith("Failed") || v.startsWith("Error")).count();
-//
-//            String summary =
-//                    "Insert: " + inserted +
-//                            "\nUpdate: " + updated +
-//                            "\nDelete: " + deleted +
-//                            "\nSkipped (Duplicates): " + skipped +
-//                            "\nFailed: " + failed;
-//
-//            WindowUtils.ALERT("Import Summary", summary, WindowUtils.ALERT_INFORMATION);
+            if (!hasError[0]) {
+                WindowUtils.ALERT("Success", stageType.getDisplayName() + " data imported and applied successfully", WindowUtils.ALERT_INFORMATION);
+            } else {
+                WindowUtils.ALERT("Completed with Warnings", "Some records were skipped or failed (see previous messages)", WindowUtils.ALERT_WARNING);
+            }
 
         } catch (IOException e) {
             Logging.logException("ERROR", getClass().getName(), "importExcel", e);
@@ -268,6 +239,111 @@ public class AddUpdatePdsDataController implements Initializable {
     }
 
 
+
+//    //  Saved - Export - Import
+//    @FXML
+//    void saveRecord(ActionEvent event) {
+//        try {
+//            int userId = UserContext.getCurrentUser().getUserId();
+//            Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
+//            Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
+//            String stageDesc = stageDescriptionTextF.getText();
+//            String normalizedDesc = normalize(stageDesc);
+//
+//            if (selectedStage == null || selectedMachine == null || normalizedDesc.isEmpty()) {
+//                WindowUtils.ALERT("Warning", "Stage, Machine, and Description are required", WindowUtils.ALERT_WARNING);
+//                return;
+//            }
+//
+//            // Use switch based on stage ID (currently only handling Assembly, extend later)
+//            switch (selectedStage.getStageId()) {
+//                case 2: // Assembly
+//                    // Check duplicate
+//                    if (assemblyDao.existsAssemblyRecord(normalizedDesc, selectedMachine.getMachineId())) {
+//                        WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
+//                        return;
+//                    }
+//
+//                    // Insert new Assembly row
+//                    Assembly newAssembly = new Assembly();
+//                    newAssembly.setStageDescription(stageDesc);
+//                    newAssembly.setMachineId(selectedMachine.getMachineId());
+//                    newAssembly.setUserId(userId);
+//
+//                    int generatedId = assemblyDao.insert(newAssembly);
+//                    if (generatedId != -1) {
+//                        WindowUtils.ALERT("Success", "Assembly record saved successfully", WindowUtils.ALERT_INFORMATION);
+//                        clearSearchWorkOrder();
+//                        machinesCombo.getSelectionModel().clearSelection();
+//                    } else {
+//                        WindowUtils.ALERT("Error", "Failed to save Assembly record", WindowUtils.ALERT_ERROR);
+//                    }
+//                    break;
+//                case 4: // Braid
+//                    // Check duplicate
+//                    if (braidDao.existsBraidRecord(normalizedDesc, selectedMachine.getMachineId())) {
+//                        WindowUtils.ALERT("Error", "This combination of Stage & Machine already exists!", WindowUtils.ALERT_ERROR);
+//                        return;
+//                    }
+//
+//                    // Insert new Braid row
+//                    Braid newBraid = new Braid();
+//                    newBraid.setStageDescription(stageDesc);
+//                    newBraid.setMachineId(selectedMachine.getMachineId());
+//                    newBraid.setUserId(userId);
+//
+//                    int braidGeneratedId = braidDao.insertBraid(newBraid);
+//                    if (braidGeneratedId != -1) {
+//                        WindowUtils.ALERT("Success", "Braid record saved successfully", WindowUtils.ALERT_INFORMATION);
+//                        clearSearchWorkOrder();
+//                        machinesCombo.getSelectionModel().clearSelection();
+//                    } else {
+//                        WindowUtils.ALERT("Error", "Failed to save Braid record", WindowUtils.ALERT_ERROR);
+//                    }
+//                    break;
+//                // Add cases for other stages like case 1: // Insulation, etc., with their respective DAOs
+//                default:
+//                    WindowUtils.ALERT("Info", "Stage not yet supported for saving", WindowUtils.ALERT_INFORMATION);
+//                    break;
+//            }
+//
+//        } catch (Exception ex) {
+//            Logging.logException("ERROR", this.getClass().getName(), "saveAssemblyRecord", ex);
+//        }
+//    }
+//
+//    @FXML
+//    void exportExcel(ActionEvent event) {
+//        try {
+//            Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
+//            if (selectedStage == null) {
+//                WindowUtils.ALERT("Warning", "Please select a stage first", WindowUtils.ALERT_WARNING);
+//                return;
+//            }
+//
+//            StageType stageType = StageType.fromId(selectedStage.getStageId());
+//            if (stageType == null) {
+//                WindowUtils.ALERT("Info", "Stage not yet supported for export", WindowUtils.ALERT_INFORMATION);
+//                return;
+//            }
+//
+//            switch (stageType) {
+//                case ASSEMBLY -> {
+//                    List<Assembly> assemblies = assemblyDao.getAll();
+//                    AssemblyFile.exportToExcel(assemblies);
+//                }
+//                case BRAID -> {
+//                    List<Braid> braids = braidDao.getAllBraids();
+//                    BraidFile.exportToExcel(braids);
+//                }
+//                default -> WindowUtils.ALERT("Info", stageType.getDisplayName() + " export coming soon", WindowUtils.ALERT_INFORMATION);
+//            }
+//        } catch (Exception e) {
+//            Logging.logException("ERROR", this.getClass().getName(), "exportExcel", e);
+//            WindowUtils.ALERT("Error", "Export failed: " + e.getMessage(), WindowUtils.ALERT_ERROR);
+//        }
+//    }
+//
 //    @FXML
 //    void importExcel(ActionEvent event) {
 //        try {
@@ -289,30 +365,39 @@ public class AddUpdatePdsDataController implements Initializable {
 //            File file = fileChooser.showOpenDialog(null);
 //            if (file == null) return;
 //
-//            List<String> errors;
+//            Object handler = switch (stageType) {
+//                case ASSEMBLY -> new AssemblyExcelHandler();
+//                case BRAID    -> new BraidExcelHandler();
+//                default -> null;
+//            };
 //
-//            switch (stageType) {
-//                case ASSEMBLY -> {
-//                    List<Assembly> assemblies = AssemblyService.importFromExcel(file);
-//                    errors = new AssemblyValidator().validate(assemblies);
-//                    if (!errors.isEmpty()) {
-//                        WindowUtils.ALERT("Validation Errors", String.join("\n", errors), WindowUtils.ALERT_ERROR);
-//                        return;
-//                    }
-//                    new AssemblyProcessor().applyActionsToDb(assemblies);
-//                    WindowUtils.ALERT("Success", "Assembly data imported and applied successfully", WindowUtils.ALERT_INFORMATION);
-//                }
-//                case BRAID -> {
-//                    List<Braid> braids = BraidService.importFromExcel(file);
-//                    errors = new BraidValidator().validate(braids);
-//                    if (!errors.isEmpty()) {
-//                        WindowUtils.ALERT("Validation Errors", String.join("\n", errors), WindowUtils.ALERT_ERROR);
-//                        return;
-//                    }
-//                    new BraidProcessor().applyActionsToDb(braids);
-//                    WindowUtils.ALERT("Success", "Braid data imported and applied successfully", WindowUtils.ALERT_INFORMATION);
-//                }
-//                default -> WindowUtils.ALERT("Coming Soon", stageType.getDisplayName() + " import will be available soon", WindowUtils.ALERT_INFORMATION);
+//            if (handler == null) {
+//                WindowUtils.ALERT("Coming Soon", stageType.getDisplayName() + " import will be available soon", WindowUtils.ALERT_INFORMATION);
+//                return;
+//            }
+//
+//            @SuppressWarnings("unchecked")
+//            var excelService = (StageExcelService<Object>) handler;
+//
+//            @SuppressWarnings("unchecked")
+//            var validator = (StageValidator<Object>) handler;
+//
+//            @SuppressWarnings("unchecked")
+//            var processor = (StageProcessor<Object>) handler;
+//
+//            List<Object> data = excelService.importFromExcel(file);
+//            List<String> errors = validator.validate(data);
+//
+//            if (!errors.isEmpty()) {
+//                WindowUtils.ALERT("Validation Errors", String.join("\n", errors), WindowUtils.ALERT_ERROR);
+//                return;
+//            }
+//            boolean[] hasError = new boolean[1];
+//            processor.applyActions(data, hasError);
+//            if (!hasError[0]) {
+//                WindowUtils.ALERT("Success", stageType.getDisplayName() + " data imported and applied successfully", WindowUtils.ALERT_INFORMATION);
+//            } else {
+//                WindowUtils.ALERT("Completed with Warnings", "Some records were skipped or failed (see previous messages)", WindowUtils.ALERT_WARNING);
 //            }
 //
 //        } catch (IOException e) {
@@ -323,7 +408,6 @@ public class AddUpdatePdsDataController implements Initializable {
 //            WindowUtils.ALERT("Error", "Unexpected error: " + e.getMessage(), WindowUtils.ALERT_ERROR);
 //        }
 //    }
-
 
 
     private void initCombo() {

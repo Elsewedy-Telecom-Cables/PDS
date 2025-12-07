@@ -78,8 +78,10 @@ public class BraidExcelHandler
         return new BraidValidator().validate(items);
     }
 
+
+
     @Override
-    public void applyActions(List<Braid> items) {
-        new BraidProcessor().applyActionsToDb(items);
+    public void applyActions(List<Braid> items, boolean[] hasError) {
+        new BraidProcessor().applyActionsToDb(items,hasError);
     }
 }

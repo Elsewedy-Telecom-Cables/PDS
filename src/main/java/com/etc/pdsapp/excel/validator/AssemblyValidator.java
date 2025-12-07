@@ -13,43 +13,43 @@ public class AssemblyValidator {
 
         for (int i = 0; i < assemblies.size(); i++) {
             Assembly a = assemblies.get(i);
-            String rowIdentifier = "Row " + (i + 1) + ": ";
+            String row = "Row " + (i + 1) + ": ";
 
-            //  Action Check
-            if (a.getAction() == null ||
-                    !(a.getAction().equalsIgnoreCase("INSERT") ||
-                            a.getAction().equalsIgnoreCase("UPDATE") ||
-                            a.getAction().equalsIgnoreCase("DELETE"))) {
+            String action = a.getAction();
+            int assemblyId = a.getAssemblyId();
 
-                String msg = rowIdentifier + "Invalid action: " + a.getAction();
-                errors.add(msg);
-                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", msg);
+            // 1. Action validation
+            if (action == null || action.isBlank()) {
+                errors.add(row + "Action is missing (must be INSERT, UPDATE or DELETE)");
+                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", row + "Missing action");
+                continue; // Skip further checks if action is invalid
             }
 
-            //   ID Check For  UPDATE/DELETE
-            if ((a.getAction() != null &&
-                    (a.getAction().equalsIgnoreCase("UPDATE") || a.getAction().equalsIgnoreCase("DELETE")))
-                    && a.getAssemblyId() <= 0) {
+            action = action.trim().toUpperCase();
 
-                String msg = rowIdentifier + "ID is required for UPDATE/DELETE";
-                errors.add(msg);
-                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", msg);
+            if (!action.equals("INSERT") && !action.equals("UPDATE") && !action.equals("DELETE")) {
+                errors.add(row + "Invalid action: '" + a.getAction() + "' (allowed: INSERT, UPDATE, DELETE)");
+                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", row + "Invalid action: " + a.getAction());
             }
 
-            // Check From Columns required
-            if (a.getStageDescription() == null || a.getStageDescription().isEmpty()) {
-                String msg = rowIdentifier + "Stage Description is required";
-                errors.add(msg);
-                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", msg);
+            // 2. ID required for UPDATE/DELETE
+            if (("UPDATE".equals(action) || "DELETE".equals(action)) && assemblyId <= 0) {
+                errors.add(row + "assembly_id is required and must be > 0 for action: " + action);
+                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", row + "Missing or invalid ID for " + action);
+            }
+
+            // 3. Mandatory fields for all actions
+            if (a.getStageDescription() == null || a.getStageDescription().trim().isEmpty()) {
+                errors.add(row + "Stage Description is required");
+                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", row + "Empty Stage Description");
             }
 
             if (a.getMachineId() <= 0) {
-                String msg = rowIdentifier + "Machine ID is required and must be > 0";
-                errors.add(msg);
-                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", msg);
+                errors.add(row + "Machine ID is required and must be > 0");
+                Logging.logMessage(Logging.WARN, getClass().getName(), "validate", row + "Invalid Machine ID: " + a.getMachineId());
             }
 
-            // Columns nullable like userId, lineSpeed, traverseLay, notes accept null
+            // Note: All other fields (colors, lay lengths, line_speed, etc.) are optional → no validation needed
         }
 
         return errors;

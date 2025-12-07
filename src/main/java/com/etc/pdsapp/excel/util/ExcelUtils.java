@@ -1,7 +1,10 @@
 package com.etc.pdsapp.excel.util;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+
+import java.math.BigDecimal;
 
 public class ExcelUtils {
 
@@ -46,6 +49,19 @@ public class ExcelUtils {
     public static Integer getCellInt(Row row, int colIndex) {
         Double d = getCellDouble(row, colIndex);
         return d != null ? d.intValue() : null;
+    }
+
+    public static BigDecimal getCellBigDecimal(Row row, int cellIndex) {
+        Cell cell = row.getCell(cellIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+        if (cell == null || cell.getCellType() == CellType.BLANK) return null;
+        if (cell.getCellType() == CellType.NUMERIC) return BigDecimal.valueOf(cell.getNumericCellValue());
+        if (cell.getCellType() == CellType.STRING) {
+            String val = cell.getStringCellValue().trim();
+            if (val.isEmpty()) return null;
+            try { return new BigDecimal(val); }
+            catch (NumberFormatException e) { return null; }
+        }
+        return null;
     }
 
 }

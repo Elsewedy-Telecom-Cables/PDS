@@ -13,8 +13,14 @@ public class Braid {
 
     public Braid() {}
 
+    public Braid(String stageDescription, int machineId, Integer userId) {
+        this.stageDescription = stageDescription;
+        this.machineId = machineId;
+        this.userId = userId;
+    }
+
     public Braid(int braidId, String stageDescription, int machineId, Integer userId,
-                 Double deckSpeed, Double speed, Double pitch,String notes) {
+                 Double deckSpeed, Double speed, Double pitch, String notes) {
         this.braidId = braidId;
         this.stageDescription = stageDescription;
         this.machineId = machineId;

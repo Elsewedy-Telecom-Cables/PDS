@@ -2,6 +2,7 @@ package com.etc.pdsapp.services;
 
 import com.etc.pdsapp.dao.UserDao;
 import com.etc.pdsapp.model.User;
+import com.etc.pdsapp.model.UserContext;
 import javafx.application.Platform;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
@@ -90,6 +91,31 @@ public class UserService {
             }
             return userId != -1;
         }).orElse(false);
+    }
+
+    public static boolean usersAuthorization() {
+        String username = UserContext.getCurrentUser().getUserName().trim();
+        int role = UserContext.getCurrentUser().getRole();
+
+        boolean isAdmin = role == 3;   // Admin
+        boolean isSuperVisor = role == 2;  // Supervisor
+        //  boolean isIbrahemMansour = username.equalsIgnoreCase("Tooling.room2");
+        if (isAdmin || isSuperVisor) {
+            return true;
+        }
+        WindowUtils.ALERT("تنبيه", "ليس للمستخدم صلاحية الوصول", WindowUtils.ALERT_ERROR);
+        return false;
+    }
+
+
+    public static boolean adminAuthorization() {
+        boolean Admin_Role = UserContext.getCurrentUser().getRole() == 3;
+       // int Role = UserContext.getCurrentUser().getRole();
+        if (!Admin_Role) {
+            WindowUtils.ALERT("تنبيه", "ليس للمستخدم صلاحية الوصول", WindowUtils.ALERT_ERROR);
+            return false;
+        }
+        return true;
     }
 
 

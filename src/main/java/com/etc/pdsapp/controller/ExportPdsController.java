@@ -1,16 +1,21 @@
 package com.etc.pdsapp.controller;
 import com.etc.pdsapp.dao.*;
+import com.etc.pdsapp.enums.StageType;
 import com.etc.pdsapp.logging.Logging;
 import com.etc.pdsapp.model.Braid;
 import com.etc.pdsapp.model.Machine;
 import com.etc.pdsapp.model.Stage;
 import com.etc.pdsapp.model.UserContext;
+import com.etc.pdsapp.report.generator.AssemblyReportGenerator;
+import com.etc.pdsapp.report.generator.BraidReportGenerator;
+import com.etc.pdsapp.report.generator.ReportGenerator;
 import com.etc.pdsapp.utils.StageUtils;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 
 import java.awt.*;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,6 +34,7 @@ import com.etc.pdsapp.services.WindowUtils;
 import javafx.concurrent.Task;
 import com.etc.pdsapp.model.*;
 import javafx.stage.Modality;
+import javafx.stage.WindowEvent;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellReference;
@@ -103,23 +109,37 @@ public class ExportPdsController implements Initializable {
 
     private Alert loadingAlert;
     private Button okBtn;
+
     public void showLoadingAlert(String message) {
         loadingAlert = new Alert(Alert.AlertType.INFORMATION);
         loadingAlert.setTitle("Loading");
         loadingAlert.setHeaderText(null);
         loadingAlert.setContentText(message);
 
-        okBtn = (Button) loadingAlert.getDialogPane().lookupButton(ButtonType.OK);
-        okBtn.setDisable(true); // منع المستخدم من الضغط
-        loadingAlert.initModality(Modality.APPLICATION_MODAL);
+        Button okBtn = (Button) loadingAlert.getDialogPane().lookupButton(ButtonType.OK);
+        if (okBtn != null) {
+            okBtn.setVisible(false);
+            okBtn.setManaged(false);
+        }
+
+        javafx.stage.Stage stage = (javafx.stage.Stage) loadingAlert.getDialogPane().getScene().getWindow();
+
+        stage.setOnCloseRequest(WindowEvent::consume);
+
+        stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+
+        stage.setResizable(false);
 
         loadingAlert.show();
     }
 
-    // call this after data is loaded
-    public void enableAlertOk() {
-        if (okBtn != null) okBtn.setDisable(false);
+    public void hideLoadingAlert() {
+        if (loadingAlert != null && loadingAlert.isShowing()) {
+            Platform.runLater(loadingAlert::close);
+        }
     }
+
+
 
 
     public boolean showConfirmNoMatch() {
@@ -148,6 +168,7 @@ public class ExportPdsController implements Initializable {
             WindowUtils.ALERT("Warning", "Please enter a valid Work Order number", WindowUtils.ALERT_WARNING);
             return;
         }
+        hideLoadingAlert();
 
         stageDescriptionTextF.setText("Please Wait 45 Seconds As Minimum - Loading data from Oracle...");
         //
@@ -166,6 +187,7 @@ public class ExportPdsController implements Initializable {
                 currentReport = getValue();
 
                 Platform.runLater(() -> {
+                    hideLoadingAlert();
                     if (currentReport == null || currentReport.getWorkOrder() == null) {
                         stageDescriptionTextF.setText("");
                         WindowUtils.ALERT("Not Found", "No data found for Work Order: " + workOrderInput, WindowUtils.ALERT_ERROR);
@@ -175,7 +197,8 @@ public class ExportPdsController implements Initializable {
                     stageDescriptionTextF.setText(currentReport.getProducedItemDescription());
                   //  showBlockingInfo("Success", "PDS Data Loaded.\nYou may now export the report.");
 
-                    enableAlertOk(); // السماح بالضغط على OK بعد وصول البيانات
+                    //enableAlertOk(); // السماح بالضغط على OK بعد وصول البيانات
+                    hideLoadingAlert();
 
                  //   WindowUtils.ALERT("Success", "PDS Data loaded successfully!\nYou can now export the report.", WindowUtils.ALERT_INFORMATION);
 
@@ -187,6 +210,7 @@ public class ExportPdsController implements Initializable {
             @Override
             protected void failed() {
                 Platform.runLater(() -> {
+                    hideLoadingAlert();
                     currentReport = null;
                     stageDescriptionTextF.setText("");
                     Throwable ex = getException();
@@ -199,113 +223,169 @@ public class ExportPdsController implements Initializable {
         new Thread(task).start();
     }
 
-    @FXML
-    void exportPdsExcel(ActionEvent event) {
 
-        if (currentReport == null) {
-            WindowUtils.ALERT("No Data", "Please load PDS data first using 'Get PDS Data'", WindowUtils.ALERT_WARNING);
-            return;
-        }
+//    @FXML
+//    void exportPdsExcel(ActionEvent event) {
+//
+//        if (currentReport == null) {
+//            WindowUtils.ALERT("No Data", "Please load PDS data first using 'Get PDS Data'", WindowUtils.ALERT_WARNING);
+//            return;
+//        }
+//
+//        Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
+//        Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
+//        if (selectedStage == null || selectedMachine == null) {
+//            WindowUtils.ALERT("Selection Required", "Please select Stage and Machine", WindowUtils.ALERT_WARNING);
+//            return;
+//        }
+//
+//        // منع أي تفاعل أثناء التصدير
+//        exportExcelBtn.setDisable(true);
+//        exportExcelBtn.setText("Generating Report... Please wait");
+//
+//        Task<File> exportTask = new Task<>() {
+//            @Override
+//            protected File call() throws Exception {
+//
+//                updateMessage("Fetching production data...");
+//
+//                // Normalize API description BEFORE sending to DAO
+//                String rawDesc = currentReport.getProducedItemDescription();
+//                String normalizedApi = StageUtils.normalize(rawDesc);
+//
+////                System.out.println("Original API Desc  : [" + rawDesc + "]");
+////                System.out.println("Normalized API Desc: [" + normalizedApi + "]");
+////                System.out.println("Machine ID: " + selectedMachine.getMachineId());
+//
+//                Braid productionData = braidDao.getByStageDescriptionAndMachine(
+//                        normalizedApi,
+//                        selectedMachine.getMachineId()
+//                );
+//
+//                if (productionData == null) {
+//
+//                    final boolean[] continueFlag = {false};
+//
+//                    Platform.runLater(() -> {
+//                        continueFlag[0] = showConfirmNoMatch();
+//                    });
+//
+//                    // انتظر JavaFX Thread يرجع القرار
+//                    while (!continueFlag[0]) {
+//                        Thread.sleep(50);
+//                    }
+//
+//                    if (!continueFlag[0]) {
+//                        return null; // stop export
+//                    }
+//                }
+//
+//
+//
+//                updateMessage("Creating Excel file...");
+//                File file = generateBraidExcelReportProperly(currentReport, productionData, selectedStage, selectedMachine);
+//
+//                updateMessage("Done!");
+//                return file;
+//            }
+//
+//
+//            @Override
+//            protected void succeeded() {
+//                File file = getValue();
+//                Platform.runLater(() -> {
+//                    exportExcelBtn.setText("Export PDS Report");
+//                    exportExcelBtn.setDisable(false);
+//
+//                    WindowUtils.ALERT("Success", "Report exported successfully!\nOpening file...", WindowUtils.ALERT_INFORMATION);
+//
+//                    // Open file automatically
+//                    if (Desktop.isDesktopSupported()) {
+//                        new Thread(() -> {
+//                            try {
+//                                Desktop.getDesktop().open(file);
+//                            } catch (IOException e) {
+//                                Logging.logException("ERROR", getClass().getName(), "openExcel", e);
+//                            }
+//                        }).start();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            protected void failed() {
+//                Platform.runLater(() -> {
+//                    exportExcelBtn.setText("Export PDS Report");
+//                    exportExcelBtn.setDisable(false);
+//                    Throwable ex = getException();
+//                    Logging.logException("ERROR", ExportPdsController.class.getName(), "exportPdsExcel", ex);
+//                    WindowUtils.ALERT("Export Failed", ex.getMessage(), WindowUtils.ALERT_ERROR);
+//                });
+//            }
+//
+//            @Override
+//            protected void updateMessage(String message) {
+//                Platform.runLater(() -> exportExcelBtn.setText(message));
+//            }
+//        };
+//
+//        new Thread(exportTask).start();
+//    }
 
-        Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
-        Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
-        if (selectedStage == null || selectedMachine == null) {
-            WindowUtils.ALERT("Selection Required", "Please select Stage and Machine", WindowUtils.ALERT_WARNING);
-            return;
-        }
-
-        // منع أي تفاعل أثناء التصدير
-        exportExcelBtn.setDisable(true);
-        exportExcelBtn.setText("Generating Report... Please wait");
-
-        Task<File> exportTask = new Task<>() {
-            @Override
-            protected File call() throws Exception {
-
-                updateMessage("Fetching production data...");
-
-                // Normalize API description BEFORE sending to DAO
-                String rawDesc = currentReport.getProducedItemDescription();
-                String normalizedApi = StageUtils.normalize(rawDesc);
-
-//                System.out.println("Original API Desc  : [" + rawDesc + "]");
-//                System.out.println("Normalized API Desc: [" + normalizedApi + "]");
-//                System.out.println("Machine ID: " + selectedMachine.getMachineId());
-
-                Braid productionData = braidDao.getByStageDescriptionAndMachine(
-                        normalizedApi,
-                        selectedMachine.getMachineId()
-                );
-
-                if (productionData == null) {
-
-                    final boolean[] continueFlag = {false};
-
-                    Platform.runLater(() -> {
-                        continueFlag[0] = showConfirmNoMatch();
-                    });
-
-                    // انتظر JavaFX Thread يرجع القرار
-                    while (!continueFlag[0]) {
-                        Thread.sleep(50);
-                    }
-
-                    if (!continueFlag[0]) {
-                        return null; // stop export
-                    }
-                }
-
-
-
-                updateMessage("Creating Excel file...");
-                File file = generateBraidExcelReportProperly(currentReport, productionData, selectedStage, selectedMachine);
-
-                updateMessage("Done!");
-                return file;
-            }
-
-
-            @Override
-            protected void succeeded() {
-                File file = getValue();
-                Platform.runLater(() -> {
-                    exportExcelBtn.setText("Export PDS Report");
-                    exportExcelBtn.setDisable(false);
-
-                    WindowUtils.ALERT("Success", "Report exported successfully!\nOpening file...", WindowUtils.ALERT_INFORMATION);
-
-                    // Open file automatically
-                    if (Desktop.isDesktopSupported()) {
-                        new Thread(() -> {
-                            try {
-                                Desktop.getDesktop().open(file);
-                            } catch (IOException e) {
-                                Logging.logException("ERROR", getClass().getName(), "openExcel", e);
-                            }
-                        }).start();
-                    }
-                });
-            }
-
-            @Override
-            protected void failed() {
-                Platform.runLater(() -> {
-                    exportExcelBtn.setText("Export PDS Report");
-                    exportExcelBtn.setDisable(false);
-                    Throwable ex = getException();
-                    Logging.logException("ERROR", ExportPdsController.class.getName(), "exportPdsExcel", ex);
-                    WindowUtils.ALERT("Export Failed", ex.getMessage(), WindowUtils.ALERT_ERROR);
-                });
-            }
-
-            @Override
-            protected void updateMessage(String message) {
-                Platform.runLater(() -> exportExcelBtn.setText(message));
-            }
-        };
-
-        new Thread(exportTask).start();
+@FXML
+void exportPdsExcel(ActionEvent event) {
+    if (currentReport == null) {
+        WindowUtils.ALERT("No Data", "Please load PDS data first using 'Get PDS Data'", WindowUtils.ALERT_WARNING);
+        return;
     }
+
+    Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
+    Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
+    if (selectedStage == null || selectedMachine == null) {
+        WindowUtils.ALERT("Selection Required", "Please select Stage and Machine", WindowUtils.ALERT_WARNING);
+        return;
+    }
+
+    exportExcelBtn.setDisable(true);
+    exportExcelBtn.setText("Generating Report... Please wait");
+
+    Task<File> exportTask = new Task<>() {
+        @Override
+        protected File call() throws Exception {
+            updateMessage("Fetching production data...");
+            String normalizedApi = StageUtils.normalize(currentReport.getProducedItemDescription());
+
+            Object productionData = switch (StageType.fromId(selectedStage.getStageId())) {
+                case BRAID    -> braidDao.getByStageDescriptionAndMachine(normalizedApi, selectedMachine.getMachineId());
+                case ASSEMBLY -> assemblyDao.getByStageDescriptionAndMachine(normalizedApi, selectedMachine.getMachineId());
+                default -> null;
+            };
+
+            if (productionData == null) {
+                final boolean[] proceed = {false};
+                Platform.runLater(() -> proceed[0] = showConfirmNoMatch());
+                while (!proceed[0]) Thread.sleep(50);
+                if (!proceed[0]) return null;
+            }
+
+            updateMessage("Generating report...");
+
+            ReportGenerator generator = switch (StageType.fromId(selectedStage.getStageId())) {
+                case BRAID    -> new BraidReportGenerator();
+                case ASSEMBLY -> new AssemblyReportGenerator();
+                default -> throw new UnsupportedOperationException("Report not supported for this stage yet");
+            };
+
+            return generator.generate(currentReport, productionData, selectedStage, selectedMachine);
+        }
+
+        @Override protected void succeeded() { Platform.runLater(() -> { exportExcelBtn.setText("Export PDS Report"); exportExcelBtn.setDisable(false); WindowUtils.ALERT("Success", "Report exported successfully!", WindowUtils.ALERT_INFORMATION); }); }
+        @Override protected void failed()   { Platform.runLater(() -> { exportExcelBtn.setText("Export PDS Report"); exportExcelBtn.setDisable(false); WindowUtils.ALERT("Export Failed", getException().getMessage(), WindowUtils.ALERT_ERROR); }); }
+        @Override protected void updateMessage(String msg) { Platform.runLater(() -> exportExcelBtn.setText(msg)); }
+    };
+
+    new Thread(exportTask).start();
+}
 
 
     private File generateBraidExcelReportProperly(PdsReportResponse report, Braid braidData,
@@ -411,10 +491,126 @@ public class ExportPdsController implements Initializable {
     }
 
 
+    private File generateAssemblyExcelReportProperly(PdsReportResponse report, Assembly assemblyData,
+                                                  Stage stage, Machine machine) throws Exception {
+
+        String templatePath = "/templates/AssemblyTemplate.xlsx";
+        InputStream is = getClass().getResourceAsStream(templatePath);
+        if (is == null) throw new FileNotFoundException("Template not found!");
+
+        File outputFile = new File(getExportFilePath(report.getWorkOrder()));
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+
+        java.util.function.BiConsumer<String, Object> setCell = (address, value) -> {
+            CellReference ref = new CellReference(address);
+            Row row = sheet.getRow(ref.getRow());
+            if (row == null) row = sheet.createRow(ref.getRow());
+            Cell cell = row.getCell(ref.getCol(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+            if (value instanceof String) cell.setCellValue((String) value);
+            else if (value instanceof Number) cell.setCellValue(((Number) value).doubleValue());
+            else if (value != null) cell.setCellValue(value.toString());
+            else cell.setBlank();
+        };
+
+        setCell.accept("B9", report.getWorkOrder()); // WO
+        setCell.accept("D9", new SimpleDateFormat("dd-MM-yyyy").format(new Date())); // Date
+        setCell.accept("B10", report.getSalesOrder()); // Sales Order No
+        setCell.accept("D10", report.getSoItemCode()); // Product Code
+        setCell.accept("B11", report.getTds()); // T.D.S NO.
+        setCell.accept("D11", report.getProducedItemDescription()); // Product Description
+        setCell.accept("B12", report.getCustomerName()); // Customer
+        setCell.accept("D12", report.getItemSize()); // Size
+        setCell.accept("B13", stage.getStageName()); // Stage
+        setCell.accept("D13", machine.getMachineName()); // Braiding Machine
+
+
+        if (report.getSpecificationTests() != null) {
+            for (SpecificationTest t : report.getSpecificationTests()) {
+                String rawDesc = t.getTestDescription();
+                String desc = rawDesc != null ? rawDesc.trim() : "";
+
+                desc = desc.replace("Diamter", "Diameter")
+                        .replace("Assembly", "Assembly")
+                        .replace("  ", " "); // إزالة المسافات المكررة
+
+                switch (desc) {
+                    case "Assembly Diameter" ->
+                            setCell.accept("B16", t.getTargetValue() != null ? t.getTargetValue().trim() : "");
+
+                 //   case "Lay Length" ->
+                //            setCell.accept("B17", assemblyData.getLayLength() !=null ? assemblyData.getLayLength().toString() : "");  // From DB
+
+                    case "Lay Direction" -> {
+                        setCell.accept("B18", t.getComment() != null ? t.getComment().trim() : "");
+                    }
+
+                    case "Color Sequence" ->
+                            setCell.accept("B19", t.getComment() != null ? t.getComment().trim() : "");
+
+                }
+            }
+        }
+
+
+
+        if (report.getIngredients() != null) {
+            int rowIndex = 30; // Start from row 23 (0-based 22)
+            for (Ingredient ing : report.getIngredients()) {
+                setCell.accept("A" + rowIndex, ing.getCode());
+                setCell.accept("B" + rowIndex, ing.getDescription());
+                rowIndex++;
+            }
+        }
+
+        if (assemblyData != null) {
+            setCell.accept("B17", assemblyData.getLayLength() !=null ? assemblyData.getLayLength().toString() : "");
+            setCell.accept("B23", safeBigDecimal(assemblyData.getPair1LayLength()));
+            setCell.accept("B24", safeBigDecimal(assemblyData.getPair2LayLength()));
+            setCell.accept("B25", safeBigDecimal(assemblyData.getPair3LayLength()));
+            setCell.accept("B26", safeBigDecimal(assemblyData.getPair4LayLength()));
+
+
+            setCell.accept("C23", (assemblyData.getPair1Color()!= null ? assemblyData.getPair1Color().trim() : ""));
+            setCell.accept("C24", (assemblyData.getPair1Color()!= null ? assemblyData.getPair2Color().trim() : ""));
+            setCell.accept("C25", (assemblyData.getPair1Color()!= null ? assemblyData.getPair3Color().trim() : ""));
+            setCell.accept("C26", (assemblyData.getPair1Color()!= null ? assemblyData.getPair4Color().trim() : ""));
+
+
+            setCell.accept("B38", safeDouble(assemblyData.getTraverseLay()));
+            setCell.accept("B41", safeDouble(assemblyData.getLineSpeed()));
+            setCell.accept("B44", assemblyData.getNotes() != null ? assemblyData.getNotes() : ""); // Notes
+        }
+        else {
+            System.out.println("No production data found for this stage and machine!");
+        }
+
+        try (FileOutputStream out = new FileOutputStream(outputFile)) {
+            workbook.write(out);
+        }
+
+        workbook.close();
+        is.close();
+
+        // Open file automatically
+        if (Desktop.isDesktopSupported() && outputFile.exists()) {
+            Desktop.getDesktop().open(outputFile);
+        }
+
+        return outputFile;
+    }
+
+
     // Safe double to string
     private String safeDouble(Double d) {
         return d != null ? String.format("%.2f", d) : "";
     }
+
+    // Safe BigDecimal to string
+    private String safeBigDecimal(BigDecimal value) {
+        return value != null ? String.format("%.2f", value) : "";
+    }
+
 
     // Generate export path
     private String getExportFilePath(String wo) {
