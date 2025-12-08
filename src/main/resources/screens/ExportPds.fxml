@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1436.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.ExportPdsController">
+<AnchorPane prefHeight="680.0" prefWidth="1365.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.ExportPdsController">
    <children>
-      <HBox alignment="CENTER" layoutX="37.0" layoutY="12.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="836.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
+      <HBox alignment="CENTER" layoutX="37.0" layoutY="3.2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="1408.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="3.0">
          <children>
             <VBox prefHeight="66.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
                <children>
@@ -62,7 +62,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="4.8" layoutY="71.0" prefHeight="64.0" prefWidth="1385.0" styleClass="box-13" AnchorPane.leftAnchor="4.8" AnchorPane.rightAnchor="4.7999999999999545">
+      <HBox alignment="CENTER" layoutX="4.8" layoutY="71.0" prefHeight="64.0" prefWidth="1408.0" styleClass="box-13" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="24.0">
          <children>
             <VBox alignment="CENTER" prefHeight="64.0" prefWidth="1383.0" HBox.hgrow="ALWAYS">
                <children>
@@ -129,7 +129,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="192.0" prefHeight="109.0" prefWidth="1426.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="192.0" prefHeight="110.0" prefWidth="1370.0">
          <children>
             <VBox prefHeight="110.0" prefWidth="348.0">
                <children>
@@ -185,7 +185,7 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="202.0" prefWidth="1426.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="202.0" prefWidth="1370.0">
          <children>
             <VBox prefHeight="216.0" prefWidth="500.0" styleClass="box-12">
                <children>
@@ -193,7 +193,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button fx:id="exportExcelBtn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportPdsExcel" prefHeight="38.0" prefWidth="170.0" styleClass="export-button2" text="Export PDS  " textFill="#08743b">
+                              <Button fx:id="exportExcelBtn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportPdsExcel" prefHeight="38.0" prefWidth="200.0" styleClass="export-button2" text="Export PDS Report  " textFill="#08743b">
                                  <font>
                                     <Font name="Montserrat Bold" size="13.0" />
                                  </font>
@@ -201,7 +201,7 @@
                                     <Insets />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconColor="#00842c" iconLiteral="fas-file-excel" iconSize="22" />
+                                    <FontIcon iconColor="#00842c" iconLiteral="fas-file-excel" iconSize="20" />
                                  </graphic>
                               </Button>
                            </children>

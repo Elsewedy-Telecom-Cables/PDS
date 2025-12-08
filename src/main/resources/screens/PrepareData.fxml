@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="731.0" prefWidth="1433.0" stylesheets="@../css/style3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.AddPrepareDataController">
+<AnchorPane prefHeight="731.0" prefWidth="1433.0" stylesheets="@../css/style3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.PrepareDataController">
    <children>
       <HBox alignment="CENTER" layoutX="5.0" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="55.0" prefWidth="1209.0" styleClass="box-samll1" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0">
          <children>

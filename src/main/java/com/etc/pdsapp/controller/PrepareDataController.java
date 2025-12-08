@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AddPrepareDataController implements Initializable {
+public class PrepareDataController implements Initializable {
 
     @FXML private Label date_lbl;
 

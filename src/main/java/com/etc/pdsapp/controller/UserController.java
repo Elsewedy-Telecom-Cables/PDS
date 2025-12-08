@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 import static com.etc.pdsapp.services.WindowUtils.*;
 
-public class AddUserController implements Initializable {
+public class UserController implements Initializable {
     @FXML
     private Label page_title;
 

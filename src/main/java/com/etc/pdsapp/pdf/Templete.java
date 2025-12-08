@@ -1,4 +1,4 @@
-package com.etc.pdsapp.Pdf;
+package com.etc.pdsapp.pdf;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;

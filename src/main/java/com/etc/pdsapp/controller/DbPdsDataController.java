@@ -1,22 +1,14 @@
 package com.etc.pdsapp.controller;
 import com.etc.pdsapp.dao.*;
-import com.etc.pdsapp.dao.*;
 import com.etc.pdsapp.enums.StageType;
 import com.etc.pdsapp.excel.core.StageExcelService;
 import com.etc.pdsapp.excel.core.StageProcessor;
 import com.etc.pdsapp.excel.core.StageValidator;
 import com.etc.pdsapp.excel.file.AssemblyFile;
 import com.etc.pdsapp.excel.file.BraidFile;
-import com.etc.pdsapp.excel.processor.AssemblyProcessor;
-import com.etc.pdsapp.excel.processor.BraidProcessor;
 import com.etc.pdsapp.excel.service.AssemblyExcelHandler;
-import com.etc.pdsapp.excel.service.AssemblyService;
 import com.etc.pdsapp.excel.service.BraidExcelHandler;
-import com.etc.pdsapp.excel.service.BraidService;
-import com.etc.pdsapp.excel.validator.AssemblyValidator;
-import com.etc.pdsapp.excel.validator.BraidValidator;
 import com.etc.pdsapp.logging.Logging;
-import com.etc.pdsapp.model.*;
 import com.etc.pdsapp.model.*;
 import com.etc.pdsapp.services.ApiCaller;
 import com.etc.pdsapp.services.ConfigLoader;
@@ -39,11 +31,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AddUpdatePdsDataController implements Initializable {
+public class DbPdsDataController implements Initializable {
     @FXML private AnchorPane rootPane;
     @FXML private TextField stageDescriptionTextF;
     @FXML private Label woLabel;
@@ -476,6 +467,9 @@ public class AddUpdatePdsDataController implements Initializable {
             });
 
         } catch (Exception ex) {
+            WindowUtils.ALERT_ON_FX_THREAD("خطأ",
+                    "ربما يوجد مشكلة بنظام الاوراكل برجاء الفتح والتأكد من أمر الشغل",
+                    WindowUtils.ALERT_ERROR);
             Logging.logException("ERROR", this.getClass().getName(), "getWorkOrderData", ex);
         }
     }

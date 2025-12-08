@@ -81,14 +81,14 @@
             <version>8.0.1</version>
         </dependency>
 
-        <!-- iText for Pdf generation -->
+        <!-- iText for pdf generation -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.13.4</version>
         </dependency>
 
-        <!-- PDFBox for Pdf manipulation -->
+        <!-- PDFBox for pdf manipulation -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox-app</artifactId>

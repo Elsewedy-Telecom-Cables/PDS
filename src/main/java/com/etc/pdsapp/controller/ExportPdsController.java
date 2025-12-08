@@ -215,7 +215,9 @@ public class ExportPdsController implements Initializable {
                     stageDescriptionTextF.setText("");
                     Throwable ex = getException();
                     Logging.logException("ERROR", ExportPdsController.class.getName(), "getPdsData", ex);
-                    WindowUtils.ALERT("API Error", "Failed to connect to Oracle.\nCheck internet or server.", WindowUtils.ALERT_ERROR);
+                    WindowUtils.ALERT_ON_FX_THREAD("API Error",
+                            "ربما يوجد مشكلة بنظام الاوراكل برجاء الفتح والتأكد من أمر الشغل",
+                            WindowUtils.ALERT_ERROR);
                 });
             }
         };

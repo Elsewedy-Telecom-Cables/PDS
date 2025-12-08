@@ -84,7 +84,7 @@
                <children>
                   <Button fx:id="users_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openViewUsers" prefHeight="35.0" prefWidth="140.0" styleClass="button-21" text="Users   ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-users" iconSize="10" />
+                        <FontIcon iconColor="#73683a" iconLiteral="fas-users" iconSize="10" />
                      </graphic>
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
@@ -97,10 +97,13 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="203.0">
                <children>
-                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="157.0" styleClass="button-24" text="Export PDS" textFill="WHITE">
+                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="157.0" styleClass="button-24" text="Export PDS " textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontIcon iconColor="#2a945d" iconLiteral="fas-file-excel" iconSize="18" />
+                     </graphic>
                   </Button>
                </children>
                <HBox.margin>
@@ -109,10 +112,13 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="246.0">
                <children>
-                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Add-Update PDS Data" textFill="WHITE">
+                  <Button fx:id="addPdsData_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="202.0" styleClass="button-22" text="Database - PDS  " textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <FontIcon iconColor="#aca0a0" iconLiteral="fas-database" />
+                     </graphic>
                   </Button>
                </children>
                <HBox.margin>
@@ -121,13 +127,10 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="56.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="prepare_data_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openPrepareData" prefHeight="35.0" prefWidth="150.0" styleClass="button-23" text="Database  " textFill="WHITE">
+                  <Button fx:id="prepare_data_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openPrepareData" prefHeight="35.0" prefWidth="150.0" styleClass="button-23" text="Core Tabels " textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-database" />
-                     </graphic>
                   </Button>
                </children>
                <HBox.margin>

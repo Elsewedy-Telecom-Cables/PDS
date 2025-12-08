@@ -1,8 +1,9 @@
 package com.etc.pdsapp.services;
 
-import com.etc.pdsapp.controller.AddUserController;
+import com.etc.pdsapp.controller.UserController;
 import com.etc.pdsapp.controller.LoginController;
 import com.etc.pdsapp.db.DEF;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -174,9 +175,9 @@ public class WindowUtils {
     public static final String LOGIN_PAGE = "/screens/Login.fxml";
     public static final String MAIN_PAGE = "/screens/Main.fxml";
     public static final String VIEW_USER_PAGE = "/screens/ViewUsers.fxml";
-    public static final String ADD_USER_PAGE = "/screens/AddUser.fxml";
-    public static final String  ADD_PREPARE_DATA = "/screens/AddPrepareData.fxml";
-    public static final String  ADD_UPDATE_PDS_DATA = "/screens/AddUpdatePdsData.fxml";
+    public static final String ADD_USER_PAGE = "/screens/User.fxml";
+    public static final String  ADD_PREPARE_DATA = "/screens/PrepareData.fxml";
+    public static final String  ADD_UPDATE_PDS_DATA = "/screens/DbPdsData.fxml";
     public static final String  EXPORT_PDS_DATA = "/screens/ExportPds.fxml";
 
 
@@ -200,6 +201,15 @@ public class WindowUtils {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public static void ALERT_ON_FX_THREAD(String title, String message, int type) {
+        if (Platform.isFxApplicationThread()) {
+            ALERT(title, message, type);
+        } else {
+            Platform.runLater(() -> ALERT(title, message, type));
+        }
+    }
+
     public static void OPEN_LOGIN_PAGE() {
         try {
             OPEN_WINDOW_NOT_RESIZABLE(
@@ -244,9 +254,9 @@ public class WindowUtils {
 
     public static void OPEN_EDIT_USER_PAGE(int emp_code) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/screens/AddUser.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/screens/User.fxml"));
             Parent parent = fxmlLoader.load(); // Load the FXML and get the root
-            AddUserController addupdateuser_controller = fxmlLoader.getController();
+            UserController addupdateuser_controller = fxmlLoader.getController();
             addupdateuser_controller.setUserData(emp_code, true);
             // Change Save Button from "حفظ" to " تعديل"
             addupdateuser_controller.setSaveButton();

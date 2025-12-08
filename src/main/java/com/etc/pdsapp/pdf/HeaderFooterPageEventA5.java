@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.etc.pdsapp.Pdf;
+package com.etc.pdsapp.pdf;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -27,10 +27,12 @@ import com.itextpdf.text.pdf.PdfWriter;
  *
  * @author Ahmed Gabr
  */
-public class HeaderFooterPageEvent extends PdfPageEventHelper {
 
-    private PdfTemplate t;
+public class HeaderFooterPageEventA5 extends PdfPageEventHelper{
+    
+     private PdfTemplate t;
     private Image total;
+
 
     public void onOpenDocument(PdfWriter writer, Document document) {
         t = writer.getDirectContent().createTemplate(30, 16);
@@ -38,27 +40,29 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
             total = Image.getInstance(t);
             total.setRole(PdfName.ARTIFACT);
         } catch (DocumentException ex) {
-        //    LOG_EXCEP(this.getClass().getName(), "onOpenDocument", ex);
+         //   LOG_EXCEP(this.getClass().getName(), "onOpenDocument", ex);
         }
     }
 
     @Override
     public void onEndPage(PdfWriter writer, Document document) {
-        try {
-            addHeader(writer);
-            addFooter(writer);
-        } catch (Exception ex) {
-        //    LOG_EXCEP(this.getClass().getName(), "onEndPage", ex);
-        }
+         try {
+             addHeader(writer);
+             addFooter(writer);
+         }catch (Exception ex) {
+          //   LOG_EXCEP(this.getClass().getName(), "onEndPage", ex);
+         }
     }
 
     private void addHeader(PdfWriter writer) {
         PdfPTable header = new PdfPTable(1);
         try {
-
-            PdfContentByte cb = writer.getDirectContent();
-
-            Rectangle frame2 = new Rectangle(577, 825, 18, 15); // you can resize rectangle
+            
+            
+            
+             PdfContentByte cb = writer.getDirectContent();
+                        
+            Rectangle frame2 = new Rectangle(405,580,18,15); // you can resize rectangle
             frame2.enableBorderSide(1);
             frame2.enableBorderSide(2);
             frame2.enableBorderSide(4);
@@ -69,35 +73,40 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
             frame2.setBorderWidth(2);
 
             cb.rectangle(frame2);
-
+            
+            
             // set defaults
 //            header.setWidths(new int[]{400});
-            header.setWidthPercentage(120);
-            header.setTotalWidth(527);
+            header.setWidthPercentage(100);
+            header.setTotalWidth(387);
             header.setLockedWidth(true);
-            header.getDefaultCell().setFixedHeight(100);
+            header.getDefaultCell().setFixedHeight(50);
             header.getDefaultCell().setBorderColor(BaseColor.LIGHT_GRAY);
-
-            Image image = Image.getInstance("C:\\test.png");
-            image.setAlignment(Element.ALIGN_CENTER);
-
-            PdfPCell cell1 = new PdfPCell();
-            cell1.addElement(image);
+            
+            
+        
+      Image image = Image.getInstance("C:\\test.png");
+           image.setAlignment(Element.ALIGN_CENTER);
+         
+           
+           PdfPCell cell1 = new PdfPCell();
+           cell1.addElement(image);
             header.addCell(cell1);
 
+                    
             // write content
-            header.writeSelectedRows(0, -1, 35, 820, writer.getDirectContent());
-        } catch (Exception ex) {
-          //  LOG_EXCEP(this.getClass().getName(), "addHeader", ex);
+            header.writeSelectedRows(0, -1, 18, 580, writer.getDirectContent());
+        } catch(Exception ex) {
+         //   LOG_EXCEP(this.getClass().getName(), "addHeader", ex);
         }
     }
 
-    private void addFooter(PdfWriter writer) {
+    private void addFooter(PdfWriter writer){
         PdfPTable footer = new PdfPTable(3);
         try {
             // set defaults
-            footer.setWidths(new int[]{24, 2, 1});
-            footer.setTotalWidth(527);
+            footer.setWidths(new int[]{20, 4, 2});
+            footer.setTotalWidth(370);
             footer.setLockedWidth(true);
             footer.getDefaultCell().setFixedHeight(40);
             footer.getDefaultCell().setBorder(Rectangle.TOP);
@@ -121,8 +130,8 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
             canvas.beginMarkedContentSequence(PdfName.ARTIFACT);
             footer.writeSelectedRows(0, -1, 34, 35, canvas);
             canvas.endMarkedContentSequence();
-        } catch (Exception ex) {
-        //    LOG_EXCEP(this.getClass().getName(), "addFooter", ex);
+        } catch(DocumentException ex) {
+         //   LOG_EXCEP(this.getClass().getName(), "addFooter", ex);
         }
     }
 
@@ -133,5 +142,5 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
                 new Phrase(String.valueOf(writer.getPageNumber()), new Font(Font.FontFamily.HELVETICA, 8)),
                 totalWidth, 6, 0);
     }
-
+    
 }

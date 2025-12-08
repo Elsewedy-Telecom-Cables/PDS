@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="704.0" prefWidth="1295.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.AddUpdatePdsDataController">
+<AnchorPane fx:id="rootPane" prefHeight="704.0" prefWidth="1295.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.DbPdsDataController">
    <children>
       <HBox alignment="TOP_CENTER" layoutX="7.2" layoutY="16.0" prefHeight="54.0" prefWidth="1281.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="2.0">
          <children>

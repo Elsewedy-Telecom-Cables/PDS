@@ -137,6 +137,7 @@ public class BraidReportGenerator implements ReportGenerator {
 
     private String safeString(String s) {
         return s != null ? s.trim() : "";
+
     }
 
     private String safeBigDecimal(BigDecimal value) {
