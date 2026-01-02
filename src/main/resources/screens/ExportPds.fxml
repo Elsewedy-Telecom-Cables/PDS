@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1365.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.ExportPdsController">
+<AnchorPane prefHeight="680.0" prefWidth="1365.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pds.controller.ExportPdsController">
    <children>
       <HBox alignment="CENTER" layoutX="37.0" layoutY="3.2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="1408.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="3.0">
          <children>
@@ -83,20 +83,20 @@
                                     <Insets top="1.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearPdsData" prefHeight="29.0" prefWidth="80.0" style="-fx-background-radius: 15;" styleClass="delete-button" text="Clear" HBox.hgrow="ALWAYS">
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#getPdsData" prefHeight="29.0" prefWidth="85.0" styleClass="search-button" text="Search" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="Montserrat Bold" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="1.0" left="4.0" right="4.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#getPdsData" prefHeight="29.0" prefWidth="85.0" style="-fx-background-radius: 15;" styleClass="search-button" text="Search" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Montserrat Bold" size="14.0" />
+                                    <Font name="Montserrat Bold" size="13.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="4.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearPdsData" prefHeight="29.0" prefWidth="80.0" styleClass="delete-button" text="Clear" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="1.0" left="4.0" right="4.0" />
                                  </HBox.margin>
                               </Button>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="90.0" text="Stage Des" HBox.hgrow="ALWAYS">
@@ -135,7 +135,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="41.0" prefWidth="543.0">
                      <children>
-                        <Label text="Select Stages">
+                        <Label text="Select Stage">
                            <font>
                               <Font name="Montserrat Bold" size="15.0" />
                            </font>
@@ -157,7 +157,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="41.0" prefWidth="543.0">
                      <children>
-                        <Label text="Machines">
+                        <Label text="Select Machine">
                            <font>
                               <Font name="Montserrat Bold" size="15.0" />
                            </font>
@@ -175,9 +175,9 @@
                   </HBox>
                </children>
             </VBox>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearSelectStageAndMachine" prefHeight="29.0" prefWidth="70.0" style="-fx-background-radius: 15;" styleClass="delete-button" text="Clear">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearSelectStageAndMachine" prefHeight="29.0" prefWidth="70.0" styleClass="delete-button" text="Clear">
                <font>
-                  <Font name="Montserrat Bold" size="14.0" />
+                  <Font name="Montserrat Bold" size="13.0" />
                </font>
                <HBox.margin>
                   <Insets top="25.0" />
@@ -193,7 +193,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button fx:id="exportExcelBtn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportPdsExcel" prefHeight="38.0" prefWidth="200.0" styleClass="export-button2" text="Export PDS Report  " textFill="#08743b">
+                              <Button fx:id="exportExcelBtn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportPdsExcel" prefHeight="35.0" prefWidth="200.0" styleClass="export-button2" text="Export PDS Report  " textFill="#08743b">
                                  <font>
                                     <Font name="Montserrat Bold" size="13.0" />
                                  </font>
@@ -201,7 +201,7 @@
                                     <Insets />
                                  </HBox.margin>
                                  <graphic>
-                                    <FontIcon iconColor="#00842c" iconLiteral="fas-file-excel" iconSize="20" />
+                                    <FontIcon iconColor="#00842c" iconLiteral="fas-file-excel" iconSize="18" />
                                  </graphic>
                               </Button>
                            </children>

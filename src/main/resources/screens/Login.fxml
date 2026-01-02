@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="555.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.LoginController">
+<AnchorPane prefHeight="555.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pds.controller.LoginController">
    <children>
       <Pane prefHeight="527.0" prefWidth="600.0">
          <children>
@@ -20,23 +20,13 @@
                   <Font name="Montserrat Bold" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="194.0" layoutY="67.0" prefHeight="37.0" prefWidth="229.0" text="PDS Application" textFill="#e40000">
+            <Label alignment="CENTER" layoutX="194.0" layoutY="67.0" prefHeight="37.0" prefWidth="229.0" text="PDS Application" textFill="#fd7922">
                <font>
                   <Font name="Montserrat Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fx:id="logoImageView" fitHeight="60.0" fitWidth="150.0" layoutX="15.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" />
-            <Label alignment="CENTER" layoutX="54.0" layoutY="200.0" prefHeight="43.0" prefWidth="99.0" text="Username">
-               <font>
-                  <Font name="Montserrat Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="53.0" layoutY="270.0" prefHeight="43.0" prefWidth="99.0" text="Password">
-               <font>
-                  <Font name="Montserrat Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="userNameTxtF" alignment="CENTER" layoutX="160.0" layoutY="202.0" prefHeight="40.0" prefWidth="310.0" promptText="user name" styleClass="input-01">
+            <ImageView fx:id="logoImageView" fitHeight="73.0" fitWidth="161.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="userNameTxtF" alignment="CENTER" layoutX="160.0" layoutY="202.0" prefHeight="40.0" prefWidth="310.0" promptText="username" styleClass="input-01">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -46,16 +36,16 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </PasswordField>
-            <FontIcon iconColor="#948383" iconLiteral="fas-user" iconSize="17" layoutX="442.0" layoutY="229.0" />
-            <FontIcon iconColor="#948383" iconLiteral="fas-lock" iconSize="17" layoutX="444.0" layoutY="297.0" />
+            <FontIcon iconColor="#948383" iconLiteral="fas-user" iconSize="15" layoutX="442.0" layoutY="229.0" />
+            <FontIcon iconColor="#948383" iconLiteral="fas-lock" iconSize="15" layoutX="444.0" layoutY="297.0" />
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </Pane>
-      <Button layoutX="252.0" layoutY="352.0" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #ac0f0f;" styleClass="button-6" text="SIGN IN" textFill="WHITE">
+      <Button layoutX="252.0" layoutY="352.0" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #fd7922;" styleClass="button-6" text="SIGN IN" textFill="WHITE">
          <font>
-            <Font name="Montserrat Bold" size="19.0" />
+            <Font name="Montserrat Bold" size="17.0" />
          </font>
       </Button>
       <Pane layoutX="-1.0" layoutY="511.0" prefHeight="43.0" prefWidth="600.0" styleClass="cell">

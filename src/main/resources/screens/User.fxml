@@ -12,11 +12,11 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="571.0" prefWidth="522.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pdsapp.controller.UserController">
+<AnchorPane prefHeight="571.0" prefWidth="522.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pds.controller.UserController">
    <children>
       <Pane prefHeight="68.0" prefWidth="522.0">
          <children>
-            <Label fx:id="page_title" alignment="CENTER" layoutX="137.0" layoutY="6.0" prefHeight="39.0" prefWidth="249.0" text="User Data" textFill="#003a7d">
+            <Label fx:id="page_title" alignment="CENTER" layoutX="137.0" layoutY="6.0" prefHeight="39.0" prefWidth="249.0" text="User Data" textFill="#008086">
                <font>
                   <Font name="Montserrat Bold" size="22.0" />
                </font>
@@ -25,12 +25,12 @@
       </Pane>
       <Pane layoutY="68.0" prefHeight="508.0" prefWidth="522.0" style="-fx-background-color: #FFF;">
          <children>
-            <Button fx:id="saveUser_btn" contentDisplay="CENTER" layoutX="365.0" layoutY="442.0" mnemonicParsing="false" onAction="#saveUserButton" prefHeight="39.0" prefWidth="116.0" style="-fx-background-radius: 10;" styleClass="save_btn" text="Save       ">
+            <Button fx:id="saveUser_btn" contentDisplay="CENTER" layoutX="365.0" layoutY="442.0" mnemonicParsing="false" onAction="#saveUserButton" prefHeight="39.0" prefWidth="116.0" styleClass="button-15" text="Save       ">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-check" iconSize="15" layoutX="453.0" layoutY="466.0" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-save" iconSize="11" layoutX="456.0" layoutY="466.0" />
             <VBox alignment="CENTER_LEFT" layoutX="21.0" layoutY="3.0" prefHeight="424.0" prefWidth="116.0">
                <children>
                   <Label contentDisplay="RIGHT" prefHeight="39.0" prefWidth="97.0" text="Emp Code">

@@ -813,7 +813,6 @@
 
 .title-box {
     -fx-background-color: linear-gradient(to right, #e0e1e3, #c8cccf); /* رمادي فاتح مائل لفضي */
-    -fx-padding: 1 2;
     -fx-background-radius: 10;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 5, 0.2, 0, 2);
     -fx-border-color: #038296; /* أخضر زراير 15 أو 16 */

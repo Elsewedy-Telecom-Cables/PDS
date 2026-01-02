@@ -1,4 +1,4 @@
-module com.etc.pdsapp {
+module com.etc.pds {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.xml;
@@ -20,10 +20,10 @@ module com.etc.pdsapp {
     requires org.apache.poi.poi;
 
 
-    opens com.etc.pdsapp.controller to javafx.fxml;
+    opens com.etc.pds.controller to javafx.fxml;
     opens screens to javafx.fxml;
-    exports com.etc.pdsapp.controller;
-    exports com.etc.pdsapp.model;
+    exports com.etc.pds.controller;
+    exports com.etc.pds.model;
 
 
 
