@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="605.0" prefWidth="1045.0" stylesheets="@../css/style4.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.pds.controller.ViewUsersController">
    <children>
-      <TableView fx:id="users_tbl_view" layoutX="11.2" layoutY="64.8" nodeOrientation="LEFT_TO_RIGHT" prefHeight="535.0" prefWidth="1035.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="65.0">
+      <TableView fx:id="users_tbl_view" layoutX="11.2" layoutY="60.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="540.0" prefWidth="1035.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
          <columns>
             <TableColumn fx:id="userId_colm" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="ID" />
             <TableColumn fx:id="empId_colm" maxWidth="1.7976931348623157E308" prefWidth="130.0" styleClass="userIdCol" text="Emp Code" />
@@ -25,33 +25,33 @@
             <TableColumn fx:id="edit_colm" maxWidth="1.7976931348623157E308" prefWidth="105.0" text="Update-Delete" />
          </columns>
       </TableView>
-      <HBox alignment="CENTER_RIGHT" prefHeight="74.0" prefWidth="979.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="979.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Button contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openAddUserPage" prefHeight="34.0" prefWidth="142.0" styleClass="button-15" text="Add User">
+            <Button contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openAddUserPage" prefHeight="32.0" prefWidth="120.0" styleClass="button-15" text="Add User">
                <font>
                   <Font name="Montserrat Bold" size="13.0" />
                </font>
                <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets right="10.0" />
                </HBox.margin>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-user-plus" iconSize="13" wrappingWidth="20.999998450279236" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-user-plus" iconSize="11" wrappingWidth="20.999998450279236" />
                </graphic>
             </Button>
-            <TextField fx:id="filterUsers_txtF" alignment="CENTER" onKeyPressed="#filter_Users" prefHeight="36.0" prefWidth="587.0" promptText="Search" styleClass="input3" HBox.hgrow="ALWAYS">
+            <TextField fx:id="filterUsers_txtF" alignment="CENTER" onKeyPressed="#filter_Users" prefHeight="34.0" prefWidth="587.0" promptText="Search" styleClass="input4" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </TextField>
-            <Button fx:id="clearSearchBtn" contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="34.0" prefWidth="100.0" styleClass="delete-button" text="Clear">
+            <Button fx:id="clearSearchBtn" contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="32.0" prefWidth="90.0" styleClass="delete-button" text="Clear">
                <font>
                   <Font name="Montserrat Bold" size="13.0" />
                </font>
                <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets bottom="2.0" left="10.0" />
                </HBox.margin>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-eraser" iconSize="12" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-eraser" iconSize="11" />
                </graphic>
             </Button>
          </children>

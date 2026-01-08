@@ -20,14 +20,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import java.io.File;
@@ -46,6 +45,8 @@ public class CoreTablesController implements Initializable {
     @FXML private Button importExcelBtn;
     @FXML private ComboBox<Machine> machinesCombo;
     @FXML private ComboBox<Stage> stagesCombo;
+    @FXML private Label showMachineLabel;
+    private final ContextMenu machinesMenu = new ContextMenu();
 
     // Lists
     ObservableList<Stage> listStages;
@@ -65,10 +66,42 @@ public class CoreTablesController implements Initializable {
             workOrderTextF.requestFocus();
             workOrderTextF.positionCaret(workOrderTextF.getText().length());
         });
+
         int userId = UserContext.getCurrentUser().getUserId();
         initCombo();
         initExcelIcon();
+        showMachineLabel.setCursor(Cursor.HAND);
+        showMachineLabel.setStyle("-fx-text-fill: #1a73e8;");
+        showMachineLabel.setOnMouseClicked(event -> {
+
+            if (machinesMenu.isShowing()) {
+                machinesMenu.hide();
+            } else {
+                buildMachinesMenu();
+                machinesMenu.show(
+                        showMachineLabel,
+                        event.getScreenX(),
+                        event.getScreenY()
+                );
+            }
+
+        });
+
     }
+
+    private void buildMachinesMenu() {
+        machinesMenu.getItems().clear();
+
+        ObservableList<Machine> machines = machineDao.getAllMachines();
+
+        for (Machine m : machines) {
+            MenuItem item = new MenuItem(
+                    "ID: " + m.getMachineId() + " - " + m.getMachineName()
+            );
+            machinesMenu.getItems().add(item);
+        }
+    }
+
 
     private String normalize(String s) {
         return s
@@ -402,6 +435,8 @@ public class CoreTablesController implements Initializable {
 //            WindowUtils.ALERT("Error", "Unexpected error: " + e.getMessage(), WindowUtils.ALERT_ERROR);
 //        }
 //    }
+
+
 
 
     private void initCombo() {

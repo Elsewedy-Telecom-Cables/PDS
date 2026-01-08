@@ -84,7 +84,7 @@
                                     <Insets bottom="2.0" left="4.0" right="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearSearchWorkOrder" prefHeight="29.0" prefWidth="70.0" style="-fx-background-radius: 0;" styleClass="delete-button" text="Clear" HBox.hgrow="ALWAYS">
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#clearSearchWorkOrder" prefHeight="29.0" prefWidth="70.0" styleClass="delete-button" text="Clear" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="13.0" />
                                  </font>
@@ -181,6 +181,15 @@
                         <Insets top="25.0" />
                      </HBox.margin>
                   </Button>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="showMachineLabel" text="Show Macines ID">
+                           <HBox.margin>
+                              <Insets top="25.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="202.0" prefWidth="1426.0">

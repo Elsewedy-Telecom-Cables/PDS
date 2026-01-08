@@ -257,7 +257,7 @@ public class AssemblyDao {
 
     public boolean update(Assembly a) {
         String sql = """
-            UPDATE pds.dbo.assembly SET 
+            UPDATE pds.dbo.assembly SET
                 stage_description = ?, machine_id = ?, user_id = ?, line_speed = ?, traverse_lay = ?, lay_length = ?,
                 pair_1_lay_length = ?, pair_2_lay_length = ?, pair_3_lay_length = ?, pair_4_lay_length = ?,
                 pair_1_color = ?, pair_2_color = ?, pair_3_color = ?, pair_4_color = ?, notes = ?
@@ -316,9 +316,11 @@ public class AssemblyDao {
                     String dbDesc = rs.getString("stage_description");
                     if (dbDesc != null && StageUtils.normalize(dbDesc).equals(normalized)) {
                         return true;
+
                     }
                 }
             }
+
         } catch (SQLException e) {
             Logging.logExpWithMessage("ERROR", AssemblyDao.class.getName(), "existsAssemblyRecord", e, "sql", sql);
         }
@@ -326,35 +328,164 @@ public class AssemblyDao {
     }
 
     // Critical function: Used by API matching
+//    public Assembly getByStageDescriptionAndMachine(String apiDescription, int machineId) {
+//        if (apiDescription == null || apiDescription.isEmpty()) {
+//            return null;
+//        }
+//
+//        String processedApi = apiDescription.toLowerCase().trim();
+//
+//        String sql = """
+//        SELECT TOP 1
+//            assembly_id, stage_description, machine_id, user_id, line_speed, traverse_lay,
+//            lay_length, pair_1_lay_length, pair_2_lay_length, pair_3_lay_length, pair_4_lay_length,
+//            pair_1_color, pair_2_color, pair_3_color, pair_4_color, notes
+//        FROM pds.dbo.assembly
+//        WHERE machine_id = ?
+//          AND REPLACE(
+//              REPLACE(
+//                  REPLACE(
+//                      REPLACE(
+//                          REPLACE(
+//                              REPLACE(
+//                                  REPLACE(
+//                                      LOWER(
+//                                          REPLACE(
+//                                              REPLACE(
+//                                                  REPLACE(stage_description, CHAR(13)+CHAR(10), ''),
+//                                                  CHAR(10), ''),
+//                                              CHAR(13), '')
+//                                      ),
+//                                      ' ', ''),
+//                                  '-', ''),
+//                              '[', ''),
+//                          ']', ''),
+//                      '/', ''),
+//                  '.', ''),
+//              '&', '')
+//          LIKE '%' + ? + '%'
+//        ORDER BY assembly_id DESC
+//        """;
+//
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(sql)) {
+//
+//            ps.setInt(1, machineId);
+//
+//            String paramForLike = processedApi
+//                    .replace("\r\n", "")
+//                    .replace("\n", "")
+//                    .replace("\r", "")
+//                    .replace(" ", "")
+//                    .replace("-", "")
+//                    .replace("[", "")
+//                    .replace("]", "")
+//                    .replace("/", "")
+//                    .replace(".", "")
+//                    .replace("&", "");
+//
+//            ps.setString(2, paramForLike);
+//
+//            System.out.println("Searching with cleaned param: [" + paramForLike + "]");
+//
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    Assembly assembly = mapRow(rs);
+//                    System.out.println("MATCH FOUND! Assembly ID: " + assembly.getAssemblyId());
+//                    return assembly;
+//                } else {
+//                    System.out.println("NO MATCH FOUND for machine_id = " + machineId);
+//                }
+//            }
+//
+//        } catch (SQLException e) {
+//            Logging.logException("ERROR", AssemblyDao.class.getName(), "getByStageDescriptionAndMachine", e);
+//        }
+//
+//        return null;
+//    }
+
+
+    // Critical function: Used by API matching
     public Assembly getByStageDescriptionAndMachine(String apiDescription, int machineId) {
-        String cleanApi = StageUtils.normalize(apiDescription);
+        if (apiDescription == null || apiDescription.isEmpty()) {
+            return null;
+        }
+
+        String normalizedApi = StageUtils.normalize(apiDescription);
+
         String sql = """
-            SELECT TOP 1 assembly_id, stage_description, machine_id, user_id, 
-                   line_speed, traverse_lay, lay_length,
-                   pair_1_lay_length, pair_2_lay_length, pair_3_lay_length, pair_4_lay_length,
-                   pair_1_color, pair_2_color, pair_3_color, pair_4_color, notes
-            FROM pds.dbo.assembly 
-            WHERE machine_id = ? 
-              AND LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
-                  stage_description, ' ', ''), '-', ''), '[', ''), ']', ''), '/', ''), '.', '')) = ?
-            ORDER BY assembly_id DESC
-            """;
+        SELECT TOP 1
+            assembly_id, stage_description, machine_id, user_id, line_speed, traverse_lay,
+            lay_length, pair_1_lay_length, pair_2_lay_length, pair_3_lay_length, pair_4_lay_length,
+            pair_1_color, pair_2_color, pair_3_color, pair_4_color, notes
+        FROM pds.dbo.assembly
+        WHERE machine_id = ?
+        ORDER BY assembly_id DESC
+        """;
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setInt(1, machineId);
-            ps.setString(2, cleanApi);
 
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return mapRow(rs);
+                while (rs.next()) {
+                    String dbDescription = rs.getString("stage_description");
+                    if (dbDescription != null && StageUtils.normalize(dbDescription).equals(normalizedApi)) {
+                        System.out.println("MATCH FOUND! Assembly ID: " + rs.getInt("assembly_id"));
+
+                        System.out.println("DB Original: [" + dbDescription + "]");
+                        System.out.println("DB Normalized: [" + normalizedApi + "]");
+                        return mapRow(rs);
+                    }
                 }
             }
+
+            System.out.println("NO MATCH FOUND for normalized: [" + normalizedApi + "]");
+
         } catch (Exception e) {
             Logging.logException("ERROR", AssemblyDao.class.getName(), "getByStageDescriptionAndMachine", e);
         }
+
         return null;
     }
+
+    ///
+////    // Critical function: Used by API matching
+//    public Assembly getByStageDescriptionAndMachine(String apiDescription, int machineId) {
+//        String normalizedApi = StageUtils.normalize(apiDescription);
+//        String sql = """
+//            SELECT TOP 1 assembly_id, stage_description, machine_id, user_id,
+//                   line_speed, traverse_lay, lay_length,
+//                   pair_1_lay_length, pair_2_lay_length, pair_3_lay_length, pair_4_lay_length,
+//                   pair_1_color, pair_2_color, pair_3_color, pair_4_color, notes
+//            FROM pds.dbo.assembly
+//            WHERE machine_id = ?
+//              AND LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+//                  stage_description, ' ', ''), '-', ''), '[', ''), ']', ''), '/', ''), '.', '')) LIKE ?
+//            ORDER BY assembly_id DESC
+//            """;
+//
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setInt(1, machineId);
+//            ps.setString(2, "%" + normalizedApi + "%");
+//
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    //  return mapRow(rs);
+//                    String dbDesc = rs.getString("stage_description");
+//                    if (dbDesc != null && StageUtils.normalize(dbDesc).equals(normalizedApi)) {
+//                        return mapRow(rs);
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            Logging.logException("ERROR", AssemblyDao.class.getName(), "getByStageDescriptionAndMachine", e);
+//        }
+//        return null;
+//    }
 
     private Assembly mapRow(ResultSet rs) throws SQLException {
         return new Assembly(

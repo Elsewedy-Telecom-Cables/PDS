@@ -62,7 +62,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="4.8" layoutY="71.0" prefHeight="64.0" prefWidth="1408.0" styleClass="box-13" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="24.0">
+      <HBox alignment="CENTER" layoutX="4.8" layoutY="71.0" prefHeight="64.0" prefWidth="1408.0" styleClass="box-13" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <VBox alignment="CENTER" prefHeight="64.0" prefWidth="1383.0" HBox.hgrow="ALWAYS">
                <children>
@@ -129,7 +129,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="192.0" prefHeight="110.0" prefWidth="1370.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="192.0" prefHeight="110.0" prefWidth="1370.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <VBox prefHeight="110.0" prefWidth="348.0">
                <children>
@@ -152,6 +152,9 @@
                      </children>
                   </HBox>
                </children>
+               <HBox.margin>
+                  <Insets left="60.0" />
+               </HBox.margin>
             </VBox>
             <VBox prefHeight="110.0" prefWidth="348.0">
                <children>
@@ -185,7 +188,7 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="202.0" prefWidth="1370.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="202.0" prefWidth="1370.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <VBox prefHeight="216.0" prefWidth="500.0" styleClass="box-12">
                <children>

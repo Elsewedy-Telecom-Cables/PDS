@@ -30,6 +30,7 @@ public class AssemblyProcessor {
                 switch (action) {
 
                     case "INSERT": {
+
                         String normalized = StageUtils.normalize(a.getStageDescription());
 
                         // Check duplicate

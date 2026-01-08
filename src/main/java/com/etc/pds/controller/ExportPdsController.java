@@ -341,6 +341,7 @@ public class ExportPdsController implements Initializable {
 
     Stage selectedStage = stagesCombo.getSelectionModel().getSelectedItem();
     Machine selectedMachine = machinesCombo.getSelectionModel().getSelectedItem();
+      System.out.println("Selected Stage: " + selectedStage.getStageName() + " Selected Machine: " + selectedMachine.getMachineId());
     if (selectedStage == null || selectedMachine == null) {
         WindowUtils.ALERT("Selection Required", "Please select Stage and Machine", WindowUtils.ALERT_WARNING);
         return;
@@ -354,6 +355,9 @@ public class ExportPdsController implements Initializable {
         protected File call() throws Exception {
             updateMessage("Fetching production data...");
             String normalizedApi = StageUtils.normalize(currentReport.getProducedItemDescription());
+          //  String normalizedApi = currentReport.getProducedItemDescription();
+
+            System.out.println("Normalized API Desc: [" + normalizedApi + "]");
 
             Object productionData = switch (StageType.fromId(selectedStage.getStageId())) {
                 case BRAID    -> braidDao.getByStageDescriptionAndMachine(normalizedApi, selectedMachine.getMachineId());
